@@ -14,7 +14,7 @@ namespace MyPersonalMcp.Unity
     {
         // Constants
         public const string ServerVersion = "1.0.0";
-        public const string PackageName = "com.mycompany.mypersonalmcp";
+        public const string PackageName = "com.user.my-personal-mcp";
         public const int RequestTimeoutMinimum = 10;
 
         private const string EnvUnityPort = "UNITY_PORT";

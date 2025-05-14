@@ -19,14 +19,32 @@ namespace MyPersonalMcp.Utils
         /// </summary>
         public static string GenerateMcpConfigJson(bool useTabsIndentation)
         {
+            string serverPath = GetServerPath();
+            
+            // Check if we got an error string instead of a valid path
+            if (serverPath.StartsWith("[MCP Unity] Could not locate Server directory"))
+            {
+                Debug.LogError("Failed to generate MCP config: " + serverPath);
+                return "{}";
+            }
+            
+            string serverIndexPath = Path.Combine(serverPath, "build", "index.js");
+            
+            // Verify the index.js file exists
+            if (!File.Exists(serverIndexPath))
+            {
+                Debug.LogError($"[MCP Unity] Server index.js not found at: {serverIndexPath}. Make sure the server is built.");
+                return "{}";
+            }
+            
             var config = new Dictionary<string, object>
             {
                 { "mcpServers", new Dictionary<string, object>
                     {
-                        { "MyPersonalMcpServer", new Dictionary<string, object>
+                        { "thebifrost-server", new Dictionary<string, object>
                             {
                                 { "command", "node" },
-                                { "args", new[] { Path.Combine(GetServerPath(), "build", "index.js") } }
+                                { "args", new[] { serverIndexPath } }
                             }
                         }
                     }
@@ -70,36 +88,44 @@ namespace MyPersonalMcp.Utils
                 
             if (packageInfo != null && !string.IsNullOrEmpty(packageInfo.resolvedPath))
             {
-                return Path.Combine(packageInfo.resolvedPath, "Server~");
+                string serverPath = Path.Combine(packageInfo.resolvedPath, "Server~");
+                if (Directory.Exists(serverPath))
+                {
+                    Debug.Log($"[MCP Unity] Found Server directory via Package Manager at: {serverPath}");
+                    return serverPath;
+                }
             }
             
-            var assets = AssetDatabase.FindAssets("tsconfig");
-
-            if(assets.Length == 1)
+            // Try to find the Server~ directory in the current project
+            string projectServerPath = Path.Combine(Application.dataPath, "..", "TheBifrost", "Server~");
+            if (Directory.Exists(projectServerPath))
             {
-                // Convert relative path to absolute path
-                var relativePath = AssetDatabase.GUIDToAssetPath(assets[0]);
-                return Path.GetFullPath(Path.Combine(Application.dataPath, "..", relativePath));
+                Debug.Log($"[MCP Unity] Found Server directory in project at: {projectServerPath}");
+                return Path.GetFullPath(projectServerPath);
             }
+            
+            // Try to find by searching for tsconfig.json files
+            var assets = AssetDatabase.FindAssets("tsconfig");
+            
             if (assets.Length > 0)
             {
-                foreach (var assetJson in assets)
+                foreach (var assetGuid in assets)
                 {
-                    string relativePath = AssetDatabase.GUIDToAssetPath(assetJson);
+                    string relativePath = AssetDatabase.GUIDToAssetPath(assetGuid);
                     string fullPath = Path.GetFullPath(Path.Combine(Application.dataPath, "..", relativePath));
+                    string directoryName = Path.GetDirectoryName(fullPath);
                     
-                    if(Path.GetFileName(Path.GetDirectoryName(fullPath)) == "Server~")
+                    if (Path.GetFileName(directoryName) == "Server~")
                     {
-                        return Path.GetDirectoryName(fullPath);
+                        Debug.Log($"[MCP Unity] Found Server directory via tsconfig search at: {directoryName}");
+                        return directoryName;
                     }
                 }
             }
             
             // If we get here, we couldn't find the server path
             var errorString = "[MCP Unity] Could not locate Server directory. Please check the installation of the MCP Unity package.";
-
             Debug.LogError(errorString);
-
             return errorString;
         }
 
