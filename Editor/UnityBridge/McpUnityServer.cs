@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEditor;
+using System.IO;
+using System.Diagnostics;
 using MyPersonalMcp.Tools;
 using MyPersonalMcp.Resources;
 using MyPersonalMcp.Services;
 using MyPersonalMcp.Utils;
 using WebSocketSharp.Server;
+using Debug = UnityEngine.Debug;
 
 namespace MyPersonalMcp.Unity
 {
@@ -88,6 +91,12 @@ namespace MyPersonalMcp.Unity
             
             try
             {
+                // Check if the server needs to be built
+                if (CheckAndBuildServerIfNeeded())
+                {
+                    McpLogger.LogInfo("Server built successfully");
+                }
+                
                 // Create a new WebSocket server
                 _webSocketServer = new WebSocketServer($"ws://localhost:{MyPersonalMcpSettings.Instance.Port}");
                 // Add the MCP service endpoint with a handler that references this server
@@ -217,6 +226,127 @@ namespace MyPersonalMcp.Unity
             
             // Initialize the console logs service
             _consoleLogsService = new ConsoleLogsService();
+        }
+        
+        /// <summary>
+        /// Check if the server needs to be built and build it if necessary
+        /// </summary>
+        /// <returns>True if the server was built, false otherwise</returns>
+        private bool CheckAndBuildServerIfNeeded()
+        {
+            try
+            {
+                // Get the server path
+                string serverPath = McpConfigUtils.GetServerPath();
+                
+                // Check if the server path is valid
+                if (serverPath.StartsWith("[MCP Unity] Could not locate Server directory"))
+                {
+                    McpLogger.LogError("Could not locate Server directory. Please check the installation of the MCP Unity package.");
+                    return false;
+                }
+                
+                // Check if the build directory exists
+                string buildDir = Path.Combine(serverPath, "build");
+                string indexJsPath = Path.Combine(buildDir, "index.js");
+                
+                if (Directory.Exists(buildDir) && File.Exists(indexJsPath))
+                {
+                    // Server is already built
+                    McpLogger.LogInfo("Server is already built");
+                    return false;
+                }
+                
+                // Server needs to be built
+                McpLogger.LogInfo("Server needs to be built. Building now...");
+                
+                // Run npm install
+                if (!RunNpmCommand(serverPath, "install"))
+                {
+                    McpLogger.LogError("Failed to run npm install");
+                    return false;
+                }
+                
+                // Run npm run build
+                if (!RunNpmCommand(serverPath, "run build"))
+                {
+                    McpLogger.LogError("Failed to run npm run build");
+                    return false;
+                }
+                
+                // Check if the build was successful
+                if (!Directory.Exists(buildDir) || !File.Exists(indexJsPath))
+                {
+                    McpLogger.LogError("Build failed. Build directory or index.js not found.");
+                    return false;
+                }
+                
+                return true;
+            }
+            catch (Exception ex)
+            {
+                McpLogger.LogError($"Error checking or building server: {ex.Message}");
+                return false;
+            }
+        }
+        
+        /// <summary>
+        /// Run an npm command in the specified directory
+        /// </summary>
+        /// <param name="workingDirectory">The directory to run the command in</param>
+        /// <param name="arguments">The npm command arguments</param>
+        /// <returns>True if the command was successful, false otherwise</returns>
+        private bool RunNpmCommand(string workingDirectory, string arguments)
+        {
+            try
+            {
+                McpLogger.LogInfo($"Running npm {arguments} in {workingDirectory}");
+                
+                // Create process start info
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    FileName = "npm",
+                    Arguments = arguments,
+                    WorkingDirectory = workingDirectory,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    CreateNoWindow = true
+                };
+                
+                // Start the process
+                using (Process process = Process.Start(startInfo))
+                {
+                    if (process == null)
+                    {
+                        McpLogger.LogError("Failed to start npm process");
+                        return false;
+                    }
+                    
+                    // Read the output
+                    string output = process.StandardOutput.ReadToEnd();
+                    string error = process.StandardError.ReadToEnd();
+                    
+                    // Wait for the process to exit
+                    process.WaitForExit();
+                    
+                    // Check if the process exited successfully
+                    if (process.ExitCode != 0)
+                    {
+                        McpLogger.LogError($"npm {arguments} failed with exit code {process.ExitCode}");
+                        McpLogger.LogError($"Error: {error}");
+                        return false;
+                    }
+                    
+                    McpLogger.LogInfo($"npm {arguments} completed successfully");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                McpLogger.LogError($"Error running npm {arguments}: {ex.Message}");
+                return false;
+            }
         }
     }
 }
