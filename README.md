@@ -148,7 +148,7 @@ Installing this MCP Unity Server is a multi-step process:
 <summary><span style="font-size: 1.1em; font-weight: bold;">Option 1: Configure using Unity Editor</span></summary>
 
 1. Open the Unity Editor
-2. Navigate to Tools > MCP Unity > Server Window
+2. Navigate to Tools > MyPersonalMcp Server > Server Window
 3. Click on the "Configure" button for your AI LLM client.
 <!-- Removed configure client image -->
 
@@ -162,7 +162,7 @@ Installing this MCP Unity Server is a multi-step process:
 
 Open the MCP configuration file of your AI client (e.g. claude_desktop_config.json in Claude Desktop) and copy the following text:
 
-> Replace `ABSOLUTE/PATH/TO` with the absolute path to your TheBifrost installation or just copy the text from the Unity Editor MCP Server window (Tools > MCP Unity > Server Window).
+> Replace `ABSOLUTE/PATH/TO` with the absolute path to your TheBifrost installation or just copy the text from the Unity Editor MCP Server window (Tools > MyPersonalMcp Server > Server Window).
 
 ```json
 {
