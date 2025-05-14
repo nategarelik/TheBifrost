@@ -1,16 +1,11 @@
 
-# MCP Unity 编辑器 (游戏引擎)
+# MyPersonalMcpServer 编辑器 (游戏引擎)
 
-[![](https://badge.mcpx.dev?status=on 'MCP 已启用')](https://modelcontextprotocol.io/introduction)
 [![](https://img.shields.io/badge/Unity-000000?style=flat&logo=unity&logoColor=white 'Unity')](https://unity.com/releases/editor/archive)
 [![](https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white 'Node.js')](https://nodejs.org/en/download/)
+[![](https://img.shields.io/badge/License-MIT-red.svg 'MIT License')](License.md)
 
-[![smithery badge](https://smithery.ai/badge/@CoderGamester/mcp-unity)](https://smithery.ai/server/@CoderGamester/mcp-unity)
-[![](https://img.shields.io/github/stars/CoderGamester/mcp-unity 'Stars')](https://github.com/CoderGamester/mcp-unity/stargazers)
-[![](https://img.shields.io/github/last-commit/CoderGamester/mcp-unity 'Last Commit')](https://github.com/CoderGamester/mcp-unity/commits/main)
-[![](https://img.shields.io/badge/License-MIT-red.svg 'MIT License')](https://opensource.org/licenses/MIT)
-
-| [English](README.md) | [🇨🇳简体中文](README_zh-CN.md) | [🇯🇵日本語](README-ja.md) |
+| [English](../README.md) | [🇨🇳简体中文](README_zh-CN.md) | [🇯🇵日本語](../README-ja.md) |
 |----------------------|---------------------------------|----------------------|
 
 
@@ -41,17 +36,13 @@
      ████╗ ████║██╔════╝██╔══██╗        ██║   ██║████╗  ██║██║╚══██╔══╝╚██╗ ██╔╝
      ██╔████╔██║██║     ██████╔╝        ██║   ██║██╔██╗ ██║██║   ██║    ╚████╔╝ 
      ██║╚██╔╝██║██║     ██╔═══╝         ██║   ██║██║╚██╗██║██║   ██║     ╚██╔╝  
-     ██║ ╚═╝ ██║╚██████╗██║             ╚██████╔╝██║ ╚████║██║   ██║      ██║   
-     ╚═╝     ╚═╝ ╚═════╝╚═╝              ╚═════╝ ╚═╝  ╚═══╝╚═╝   ╚═╝      ╚═╝   
-```       
+     ██║ ╚═╝ ██║╚██████╗██║             ╚██████╔╝██║ ╚████║██║   ██║      ██║
+     ╚═╝     ╚═╝ ╚═════╝╚═╝              ╚═════╝ ╚═╝  ╚═══╝╚═╝   ╚═╝      ╚═╝
+```
 
-MCP Unity 是 Model Context Protocol 在 Unity 编辑器中的实现，允许 AI 助手与您的 Unity 项目交互。这个包提供了 Unity 和实现 MCP 协议的 Node.js 服务器之间的桥梁，使 Claude、Windsurf 和 Cursor 等 AI 代理能够在 Unity 编辑器中执行操作。
+MyPersonalMcpServer 是 Model Context Protocol 在 Unity 编辑器中的个性化实现，专为私人使用而设计，允许 AI 助手与您的 Unity 项目交互。这个包提供了 Unity 和实现 MCP 协议的 Node.js 服务器之间的桥梁，使 AI 代理能够在 Unity 编辑器中执行操作。
 
 ## 功能
-
-<a href="https://glama.ai/mcp/servers/@CoderGamester/mcp-unity">
-  <img width="400" height="200" src="https://glama.ai/mcp/servers/@CoderGamester/mcp-unity/badge" alt="Unity MCP 服务器" />
-</a>
 
 ### IDE 集成 - 包缓存访问
 
@@ -116,17 +107,16 @@ MCP Unity 通过将 Unity `Library/PackedCache` 文件夹添加到您的工作�
 
 安装 MCP Unity 服务器是一个多步骤过程：
 
-### 步骤 1: 通过 Unity 包管理器安装 Unity MCP 服务器包
+### 步骤 1: 通过 Unity 包管理器安装 MyPersonalMcpServer 包
 1. 打开 Unity 包管理器 (Window > Package Manager)
 2. 点击左上角的 "+" 按钮
 3. 选择 "Add package from git URL..."
-4. 输入: `https://github.com/CoderGamester/mcp-unity.git`
+4. 输入: `[您的 MyPersonalMcpServer 私人 Git URL]` (如果是本地包，则从磁盘添加)
 5. 点击 "Add"
 
-![package manager](https://github.com/user-attachments/assets/a72bfca4-ae52-48e7-a876-e99c701b0497)
+<!-- 移除包管理器图片 -->
 
-
-### 步骤 2: 安装 Node.js 
+### 步骤 2: 安装 Node.js
 > 要运行 MCP Unity 服务器，您需要在计算机上安装 Node.js 18 或更高版本：
 
 <details>
@@ -164,30 +154,28 @@ MCP Unity 通过将 Unity `Library/PackedCache` 文件夹添加到您的工作�
 
 1. 打开 Unity 编辑器
 2. 导航到 Tools > MCP Unity > Server Window
-3. 点击 "Configure" 按钮为您的 AI LLM 客户端配置，如下图所示
+3. 点击 "Configure" 按钮为您的 AI LLM 客户端配置。
+<!-- 移除配置客户端图片 -->
 
-![image](https://github.com/user-attachments/assets/8d286e83-da60-40fa-bd6c-5de9a77c1820)
-
-4. 使用给定的弹出窗口确认配置安装
-
-![image](https://github.com/user-attachments/assets/b1f05d33-3694-4256-a57b-8556005021ba)
+4. 使用给定的弹出窗口确认配置安装。
+<!-- 移除确认配置图片 -->
 
 </details>
 
 <details>
-<summary><span style="font-size: 1.1em; font-weight: bold;">选项 3: 手动配置</span></summary>
+<summary><span style="font-size: 1.1em; font-weight: bold;">选项 2: 手动配置</span></summary>
 
 打开您的 AI 客户端的 MCP 配置文件（例如 Claude Desktop 中的 claude_desktop_config.json）并复制以下文本：
 
-> 将 `ABSOLUTE/PATH/TO` 替换为您的 MCP Unity 安装的绝对路径，或者直接从 Unity 编辑器 MCP 服务器窗口（Tools > MCP Unity > Server Window）复制文本。
+> 将 `ABSOLUTE/PATH/TO` 替换为您的 MyPersonalMcpServer 安装的绝对路径，或者直接从 Unity 编辑器 MCP 服务器窗口（Tools > MCP Unity > Server Window）复制文本。
 
 ```json
 {
   "mcpServers": {
-    "mcp-unity": {
+    "mypersonalmcp-server": {
       "command": "node",
       "args": [
-        "ABSOLUTE/PATH/TO/mcp-unity/Server~/build/index.js"
+        "ABSOLUTE/PATH/TO/MyPersonalMcpServer/Server~/build/index.js"
       ]
     }
   }
@@ -271,7 +259,7 @@ MCP Unity 通过将 Unity `Library/PackedCache` 文件夹添加到您的工作�
 
 ### 选项 2: 使用命令行调试
 1. 打开终端或命令提示符
-2. 导航到 MCP Unity 服务器目录
+2. 导航到 MyPersonalMcpServer 服务器目录
 3. 运行以下命令：
    ```bash
    npm run debug
@@ -311,39 +299,17 @@ Connection failed: Unknown error
 
 ## 支持与反馈
 
-如有任何问题或需要支持，请在本仓库[提交 issue](https://github.com/CoderGamester/mcp-unity/issues)。
-
-你也可以通过以下方式联系：
-- Linkedin: [![](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white 'LinkedIn')](https://www.linkedin.com/in/miguel-tomas/)
-- Discord: gamester7178
-- 邮箱: game.gamester@gmail.com
+这是一个个人工具。支持由用户自行提供。
 
 ## 贡献
 
-欢迎贡献！请随时提交 Pull Request 或提出 Issue。
-
-**请遵循 [Conventional Commits](https://www.conventionalcommits.org/zh-hans/v1.0.0/) 格式提交更改。**
+这是一个个人工具，不适用贡献。
 
 ## 许可证
 
 本项目采用 [MIT License](License.md) 授权。
 
 ## 鸣谢
-
-- [Model Context Protocol](https://modelcontextprotocol.io)
-- [Unity Technologies](https://unity.com)
-- [Node.js](https://nodejs.org)
-- [WebSocket-Sharp](https://github.com/sta/websocket-sharp)
-
-## 贡献
-
-欢迎贡献！请阅读我们的[贡献指南](CONTRIBUTING.md)以获取更多信息。
-
-## 许可证
-
-此项目根据 MIT 许可证授权 - 详情请参阅 [LICENSE](LICENSE) 文件。
-
-## 致谢
 
 - [Model Context Protocol](https://modelcontextprotocol.io)
 - [Unity Technologies](https://unity.com)

@@ -5,7 +5,7 @@ using UnityEngine;
 using Newtonsoft.Json.Linq;
 using UnityEditor;
 
-namespace McpUnity.Resources
+namespace MyPersonalMcp.Resources
 {
     /// <summary>
     /// Resource for retrieving detailed information about a specific GameObject

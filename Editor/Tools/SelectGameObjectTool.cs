@@ -1,12 +1,12 @@
 using System;
 using System.Threading.Tasks;
-using McpUnity.Unity;
-using McpUnity.Utils;
+using MyPersonalMcp.Unity;
+using MyPersonalMcp.Utils;
 using UnityEngine;
 using UnityEditor;
 using Newtonsoft.Json.Linq;
 
-namespace McpUnity.Tools
+namespace MyPersonalMcp.Tools
 {
     /// <summary>
     /// Tool for selecting GameObjects in the Unity Editor
@@ -32,7 +32,7 @@ namespace McpUnity.Tools
             // Validate parameters - require either objectPath or instanceId
             if (string.IsNullOrEmpty(objectPath) && !instanceId.HasValue)
             {
-                return McpUnitySocketHandler.CreateErrorResponse(
+                return MyPersonalMcpSocketHandler.CreateErrorResponse(
                     "Required parameter 'objectPath' or 'instanceId' not provided", 
                     "validation_error"
                 );

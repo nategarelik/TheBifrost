@@ -6,26 +6,26 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WebSocketSharp;
 using WebSocketSharp.Server;
-using McpUnity.Tools;
-using McpUnity.Resources;
+using MyPersonalMcp.Tools;
+using MyPersonalMcp.Resources;
 using Unity.EditorCoroutines.Editor;
 using System.Collections;
 using System.Collections.Specialized;
-using McpUnity.Utils;
+using MyPersonalMcp.Utils;
 
-namespace McpUnity.Unity
+namespace MyPersonalMcp.Unity
 {
     /// <summary>
     /// WebSocket handler for MCP Unity communications
     /// </summary>
-    public class McpUnitySocketHandler : WebSocketBehavior
+    public class MyPersonalMcpSocketHandler : WebSocketBehavior
     {
-        private readonly McpUnityServer _server;
+        private readonly MyPersonalMcpServer _server;
         
         /// <summary>
         /// Default constructor required by WebSocketSharp
         /// </summary>
-        public McpUnitySocketHandler(McpUnityServer server)
+        public MyPersonalMcpSocketHandler(MyPersonalMcpServer server)
         {
             _server = server;
         }

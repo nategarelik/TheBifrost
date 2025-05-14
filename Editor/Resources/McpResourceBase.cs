@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Newtonsoft.Json.Linq;
 
-namespace McpUnity.Resources
+namespace MyPersonalMcp.Resources
 {
     /// <summary>
     /// Base class for MCP Unity resources that provide data from the Unity Editor

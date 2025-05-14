@@ -3,10 +3,10 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using McpUnity.Unity;
+using MyPersonalMcp.Unity;
 using Newtonsoft.Json.Linq;
 
-namespace McpUnity.Resources
+namespace MyPersonalMcp.Resources
 {
     /// <summary>
     /// Resource for getting asset information from the Unity Asset Database

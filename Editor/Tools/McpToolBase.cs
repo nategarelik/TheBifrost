@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Newtonsoft.Json.Linq;
 
-namespace McpUnity.Tools
+namespace MyPersonalMcp.Tools
 {
     /// <summary>
     /// Base class for MCP Unity tools that interact with the Unity Editor
@@ -53,7 +53,7 @@ namespace McpUnity.Tools
         {
             // Default implementation for tools that don't override this.
             // Indicate that this method should have been overridden if IsAsync is false.
-            return McpUnity.Unity.McpUnitySocketHandler.CreateErrorResponse(
+            return MyPersonalMcp.Unity.MyPersonalMcpSocketHandler.CreateErrorResponse(
                 "Execute must be overridden if IsAsync is false.", 
                 "implementation_error"
             );

@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEditor;
-using McpUnity.Tools;
-using McpUnity.Resources;
-using McpUnity.Services;
-using McpUnity.Utils;
+using MyPersonalMcp.Tools;
+using MyPersonalMcp.Resources;
+using MyPersonalMcp.Services;
+using MyPersonalMcp.Utils;
 using WebSocketSharp.Server;
 
-namespace McpUnity.Unity
+namespace MyPersonalMcp.Unity
 {
     /// <summary>
     /// MCP Unity Server to communicate Node.js MCP server.
     /// Uses WebSockets to communicate with Node.js.
     /// </summary>
     [InitializeOnLoad]
-    public class McpUnityServer
+    public class MyPersonalMcpServer
     {
-        private static McpUnityServer _instance;
+        private static MyPersonalMcpServer _instance;
         
         private readonly Dictionary<string, McpToolBase> _tools = new Dictionary<string, McpToolBase>();
         private readonly Dictionary<string, McpResourceBase> _resources = new Dictionary<string, McpResourceBase>();
@@ -31,14 +31,14 @@ namespace McpUnity.Unity
         /// <summary>
         /// Static constructor that gets called when Unity loads due to InitializeOnLoad attribute
         /// </summary>
-        static McpUnityServer()
+        static MyPersonalMcpServer()
         {
             // Initialize the singleton instance when Unity loads
             // This ensures the bridge is available as soon as Unity starts
             EditorApplication.quitting += Instance.StopServer;
 
             // Auto-restart server after domain reload
-            if (McpUnitySettings.Instance.AutoStartServer)
+            if (MyPersonalMcpSettings.Instance.AutoStartServer)
             {
                 Instance.StartServer();
             }
@@ -47,13 +47,13 @@ namespace McpUnity.Unity
         /// <summary>
         /// Singleton instance accessor
         /// </summary>
-        public static McpUnityServer Instance
+        public static MyPersonalMcpServer Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new McpUnityServer();
+                    _instance = new MyPersonalMcpServer();
                 }
                 return _instance;
             }
@@ -72,7 +72,7 @@ namespace McpUnity.Unity
         /// <summary>
         /// Private constructor to enforce singleton pattern
         /// </summary>
-        private McpUnityServer()
+        private MyPersonalMcpServer()
         {
             InitializeServices();
             RegisterResources();
@@ -89,14 +89,14 @@ namespace McpUnity.Unity
             try
             {
                 // Create a new WebSocket server
-                _webSocketServer = new WebSocketServer($"ws://localhost:{McpUnitySettings.Instance.Port}");
+                _webSocketServer = new WebSocketServer($"ws://localhost:{MyPersonalMcpSettings.Instance.Port}");
                 // Add the MCP service endpoint with a handler that references this server
-                _webSocketServer.AddWebSocketService("/McpUnity", () => new McpUnitySocketHandler(this));
+                _webSocketServer.AddWebSocketService("/MyPersonalMcp", () => new MyPersonalMcpSocketHandler(this));
                 
                 // Start the server
                 _webSocketServer.Start();
                 
-                McpLogger.LogInfo($"WebSocket server started on port {McpUnitySettings.Instance.Port}");
+                McpLogger.LogInfo($"WebSocket server started on port {MyPersonalMcpSettings.Instance.Port}");
             }
             catch (Exception ex)
             {

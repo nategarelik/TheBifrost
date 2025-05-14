@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
-using McpUnity.Unity;
+using MyPersonalMcp.Unity;
 using UnityEngine;
 using Newtonsoft.Json.Linq;
 
-namespace McpUnity.Tools
+namespace MyPersonalMcp.Tools
 {
     /// <summary>
     /// Tool for sending notification messages to the Unity console
@@ -28,7 +28,7 @@ namespace McpUnity.Tools
  
             if (string.IsNullOrEmpty(message))
             {
-                return McpUnitySocketHandler.CreateErrorResponse(
+                return MyPersonalMcpSocketHandler.CreateErrorResponse(
                     "Required parameter 'message' not provided", 
                     "validation_error"
                 );

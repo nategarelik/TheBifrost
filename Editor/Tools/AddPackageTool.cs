@@ -7,11 +7,11 @@ using UnityEditor.PackageManager;
 using UnityEditor.PackageManager.Requests;
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
-using McpUnity.Tools;
-using McpUnity.Unity;
-using McpUnity.Utils;
+using MyPersonalMcp.Tools;
+using MyPersonalMcp.Unity;
+using MyPersonalMcp.Utils;
 
-namespace McpUnity.Tools
+namespace MyPersonalMcp.Tools
 {
     /// <summary>
     /// Tool for adding new packages into the Unity Package Manager
@@ -49,7 +49,7 @@ namespace McpUnity.Tools
             string source = parameters["source"]?.ToObject<string>();
             if (string.IsNullOrEmpty(source))
             {
-                tcs.SetResult(McpUnitySocketHandler.CreateErrorResponse(
+                tcs.SetResult(MyPersonalMcpSocketHandler.CreateErrorResponse(
                     "Required parameter 'source' not provided", 
                     "validation_error"
                 ));
@@ -74,7 +74,7 @@ namespace McpUnity.Tools
                     operation.Request = AddFromDisk(parameters, tcs);
                     break;
                 default:
-                    tcs.SetResult(McpUnitySocketHandler.CreateErrorResponse(
+                    tcs.SetResult(MyPersonalMcpSocketHandler.CreateErrorResponse(
                         $"Unknown method '{source}'. Valid methods are: registry, github, disk",
                         "validation_error"
                     ));
@@ -109,7 +109,7 @@ namespace McpUnity.Tools
             string packageName = parameters["packageName"]?.ToObject<string>();
             if (string.IsNullOrEmpty(packageName))
             {
-                tcs.SetResult(McpUnitySocketHandler.CreateErrorResponse(
+                tcs.SetResult(MyPersonalMcpSocketHandler.CreateErrorResponse(
                     "Required parameter 'packageName' not provided for registry method", 
                     "validation_error"
                 ));
@@ -134,7 +134,7 @@ namespace McpUnity.Tools
             }
             catch (Exception ex)
             {
-                tcs.SetResult(McpUnitySocketHandler.CreateErrorResponse(
+                tcs.SetResult(MyPersonalMcpSocketHandler.CreateErrorResponse(
                     $"Exception adding package: {ex.Message}",
                     "package_manager_error"
                 ));
@@ -152,7 +152,7 @@ namespace McpUnity.Tools
             
             if (string.IsNullOrEmpty(packageUrl))
             {
-                tcs.SetResult(McpUnitySocketHandler.CreateErrorResponse(
+                tcs.SetResult(MyPersonalMcpSocketHandler.CreateErrorResponse(
                     "Required parameter 'repositoryUrl' not provided for github method", 
                     "validation_error"
                 ));
@@ -198,7 +198,7 @@ namespace McpUnity.Tools
             }
             catch (Exception ex)
             {
-                tcs.SetResult(McpUnitySocketHandler.CreateErrorResponse(
+                tcs.SetResult(MyPersonalMcpSocketHandler.CreateErrorResponse(
                     $"Exception adding package: {ex.Message}",
                     "package_manager_error"
                 ));
@@ -216,7 +216,7 @@ namespace McpUnity.Tools
             
             if (string.IsNullOrEmpty(path))
             {
-                tcs.SetResult(McpUnitySocketHandler.CreateErrorResponse(
+                tcs.SetResult(MyPersonalMcpSocketHandler.CreateErrorResponse(
                     "Required parameter 'path' not provided for disk method", 
                     "validation_error"
                 ));
@@ -235,7 +235,7 @@ namespace McpUnity.Tools
             }
             catch (Exception ex)
             {
-                tcs.SetResult(McpUnitySocketHandler.CreateErrorResponse(
+                tcs.SetResult(MyPersonalMcpSocketHandler.CreateErrorResponse(
                     $"Exception adding package: {ex.Message}",
                     "package_manager_error"
                 ));
@@ -327,14 +327,14 @@ namespace McpUnity.Tools
             }
             else if (operation.Request.Status == StatusCode.Failure)
             {
-                operation.CompletionSource.SetResult(McpUnitySocketHandler.CreateErrorResponse(
+                operation.CompletionSource.SetResult(MyPersonalMcpSocketHandler.CreateErrorResponse(
                     $"Failed to add package: {operation.Request.Error.message}",
                     "package_manager_error"
                 ));
             }
             else
             {
-                operation.CompletionSource.SetResult(McpUnitySocketHandler.CreateErrorResponse(
+                operation.CompletionSource.SetResult(MyPersonalMcpSocketHandler.CreateErrorResponse(
                     $"Unknown package manager status: {operation.Request.Status}",
                     "package_manager_error"
                 ));

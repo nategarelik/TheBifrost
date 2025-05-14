@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEditor;
 using Newtonsoft.Json.Linq;
 
-namespace McpUnity.Resources
+namespace MyPersonalMcp.Resources
 {
     /// <summary>
     /// Resource for retrieving all available Unity menu items

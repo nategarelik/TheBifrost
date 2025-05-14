@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq;
 
-namespace McpUnity.Utils
+namespace MyPersonalMcp.Utils
 {
     /// <summary>
     /// Manages VSCode-like IDE workspace integration for Unity projects

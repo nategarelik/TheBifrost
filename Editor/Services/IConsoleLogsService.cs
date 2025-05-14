@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-namespace McpUnity.Services
+namespace MyPersonalMcp.Services
 {
     /// <summary>
     /// Interface for the console logs service

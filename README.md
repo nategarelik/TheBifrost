@@ -1,16 +1,8 @@
-# MCP Unity Editor (Game Engine)
+# The Bifrost (Game Engine)
 
-[![](https://badge.mcpx.dev?status=on 'MCP Enabled')](https://modelcontextprotocol.io/introduction)
 [![](https://img.shields.io/badge/Unity-000000?style=flat&logo=unity&logoColor=white 'Unity')](https://unity.com/releases/editor/archive)
 [![](https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white 'Node.js')](https://nodejs.org/en/download/)
-
-[![smithery badge](https://smithery.ai/badge/@CoderGamester/mcp-unity)](https://smithery.ai/server/@CoderGamester/mcp-unity)
-[![](https://img.shields.io/github/stars/CoderGamester/mcp-unity 'Stars')](https://github.com/CoderGamester/mcp-unity/stargazers)
-[![](https://img.shields.io/github/last-commit/CoderGamester/mcp-unity 'Last Commit')](https://github.com/CoderGamester/mcp-unity/commits/main)
-[![](https://img.shields.io/badge/License-MIT-red.svg 'MIT License')](https://opensource.org/licenses/MIT)
-
-| [English](README.md) | [🇨🇳简体中文](README_zh-CN.md) | [🇯🇵日本語](README-ja.md) |
-|----------------------|---------------------------------|----------------------|
+[![](https://img.shields.io/badge/License-MIT-red.svg 'MIT License')](License.md)
 
 ```                                                                        
                               ,/(/.   *(/,                                  
@@ -39,17 +31,13 @@
      ████╗ ████║██╔════╝██╔══██╗        ██║   ██║████╗  ██║██║╚══██╔══╝╚██╗ ██╔╝
      ██╔████╔██║██║     ██████╔╝        ██║   ██║██╔██╗ ██║██║   ██║    ╚████╔╝ 
      ██║╚██╔╝██║██║     ██╔═══╝         ██║   ██║██║╚██╗██║██║   ██║     ╚██╔╝  
-     ██║ ╚═╝ ██║╚██████╗██║             ╚██████╔╝██║ ╚████║██║   ██║      ██║   
-     ╚═╝     ╚═╝ ╚═════╝╚═╝              ╚═════╝ ╚═╝  ╚═══╝╚═╝   ╚═╝      ╚═╝   
-```       
+     ██║ ╚═╝ ██║╚██████╗██║             ╚██████╔╝██║ ╚████║██║   ██║      ██║
+     ╚═╝     ╚═╝ ╚═════╝╚═╝              ╚═════╝ ╚═╝  ╚═══╝╚═╝   ╚═╝      ╚═╝
+```
 
-MCP Unity is an implementation of the Model Context Protocol for Unity Editor, allowing AI assistants to interact with your Unity projects. This package provides a bridge between Unity and a Node.js server that implements the MCP protocol, enabling AI agents like Claude, Windsurf, and Cursor to execute operations within the Unity Editor.
+The Bifrost is a personalized implementation of the Model Context Protocol for Unity Editor, designed for private use to allow AI assistants to interact with your Unity projects. This package provides a bridge between Unity and a Node.js server that implements the MCP protocol, enabling AI agents to execute operations within the Unity Editor.
 
 ## Features
-
-<a href="https://glama.ai/mcp/servers/@CoderGamester/mcp-unity">
-  <img width="400" height="200" src="https://glama.ai/mcp/servers/@CoderGamester/mcp-unity/badge" alt="Unity MCP server" />
-</a>
 
 ### IDE Integration - Package Cache Access
 
@@ -114,17 +102,16 @@ MCP Unity provides automatic integration with VSCode-like IDEs (Visual Studio Co
 
 Installing this MCP Unity Server is a multi-step process:
 
-### Step 1: Install Unity MCP Server package via Unity Package Manager
+### Step 1: Install The Bifrost package via Unity Package Manager
 1. Open the Unity Package Manager (Window > Package Manager)
 2. Click the "+" button in the top-left corner
 3. Select "Add package from git URL..."
-4. Enter: `https://github.com/CoderGamester/mcp-unity.git`
+4. Enter: `[Your Private Git URL for TheBifrost]`. If you have cloned the repository locally, you can also select "Add package from disk..." and navigate to the `TheBifrost` directory.
 5. Click "Add"
 
-![package manager](https://github.com/user-attachments/assets/a72bfca4-ae52-48e7-a876-e99c701b0497)
+<!-- Removed package manager image -->
 
-
-### Step 2: Install Node.js 
+### Step 2: Install Node.js
 > To run MCP Unity server, you'll need to have Node.js 18 or later installed on your computer:
 
 <details>
@@ -162,13 +149,11 @@ Installing this MCP Unity Server is a multi-step process:
 
 1. Open the Unity Editor
 2. Navigate to Tools > MCP Unity > Server Window
-3. Click on the "Configure" button for your AI LLM client as shown in the image below
+3. Click on the "Configure" button for your AI LLM client.
+<!-- Removed configure client image -->
 
-![image](https://github.com/user-attachments/assets/8d286e83-da60-40fa-bd6c-5de9a77c1820)
-
-4. Confirm the configuration installation with the given popup
-
-![image](https://github.com/user-attachments/assets/b1f05d33-3694-4256-a57b-8556005021ba)
+4. Confirm the configuration installation with the given popup.
+<!-- Removed confirm config image -->
 
 </details>
 
@@ -177,15 +162,15 @@ Installing this MCP Unity Server is a multi-step process:
 
 Open the MCP configuration file of your AI client (e.g. claude_desktop_config.json in Claude Desktop) and copy the following text:
 
-> Replace `ABSOLUTE/PATH/TO` with the absolute path to your MCP Unity installation or just copy the text from the Unity Editor MCP Server window (Tools > MCP Unity > Server Window).
+> Replace `ABSOLUTE/PATH/TO` with the absolute path to your TheBifrost installation or just copy the text from the Unity Editor MCP Server window (Tools > MCP Unity > Server Window).
 
 ```json
 {
    "mcpServers": {
-       "mcp-unity": {
+       "thebifrost-server": {
           "command": "node",
           "args": [
-             "ABSOLUTE/PATH/TO/mcp-unity/Server~/build/index.js"
+             "ABSOLUTE/PATH/TO/TheBifrost/Server~/build/index.js"
           ]
        }
    }
@@ -198,11 +183,10 @@ Open the MCP configuration file of your AI client (e.g. claude_desktop_config.js
 1. Open the Unity Editor
 2. Navigate to Tools > MCP Unity > Server Window
 3. Click "Start Server" to start the WebSocket server
-4. Open Claude Desktop or your AI Coding IDE (e.g. Cursor IDE, Windsurf IDE, etc.) and start executing Unity tools
-   
-![connect](https://github.com/user-attachments/assets/2e266a8b-8ba3-4902-b585-b220b11ab9a2)
+4. Open Claude Desktop or your AI Coding IDE (e.g. Cursor IDE, Windsurf IDE, etc.) and start executing Unity tools.
+<!-- Removed connect image -->
 
-> When the AI client connects to the WebSocket server, it will automatically show in the green box in the window
+> When the AI client connects to the WebSocket server, it will automatically show in the green box in the window.
 
 ## Optional: Set WebSocket Port
 By default, the WebSocket server runs on port 8090. You can change this port in two ways:
@@ -293,7 +277,7 @@ To build the server, open a terminal and:
 
 1. Navigate to the Server directory:
    ```bash
-   cd ABSOLUTE/PATH/TO/mcp-unity/Server~
+   cd ABSOLUTE/PATH/TO/TheBifrost/Server~
    ```
 
 2. Install dependencies:
@@ -316,17 +300,17 @@ To build the server, open a terminal and:
 <details>
 <summary><span style="font-size: 1.1em; font-weight: bold;">Debugging with MCP Inspector</span></summary>
 
-Debug the server with [@modelcontextprotocol/inspector](https://github.com/modelcontextprotocol/inspector):
+Debug the server with [@modelcontextprotocol/inspector](https://github.com/modelcontextprotocol/inspector) (if applicable for private use):
    - Powershell
    ```powershell
-   npx @modelcontextprotocol/inspector node Server~/build/index.js
+   npx @modelcontextprotocol/inspector node TheBifrost/Server~/build/index.js
    ```
    - Command Prompt/Terminal
    ```cmd
-   npx @modelcontextprotocol/inspector node Server~/build/index.js
+   npx @modelcontextprotocol/inspector node TheBifrost/Server~/build/index.js
    ```
 
-Don't forget to shutdown the server with `Ctrl + C` before closing the terminal or debugging it with the [MCP Inspector](https://github.com/modelcontextprotocol/inspector).
+Don't forget to shutdown the server with `Ctrl + C` before closing the terminal or debugging it with the [MCP Inspector](https://github.com/modelcontextprotocol/inspector) (if applicable).
 
 </details>
 
@@ -380,18 +364,11 @@ The workaround is to turn off **Reload Domain** in **Edit > Project Settings > E
 
 ## Support & Feedback
 
-If you have any questions or need support, please open an [issue](https://github.com/CoderGamester/mcp-unity/issues) on this repository.
-
-Alternative you can reach out on:
-- Linkedin: [![](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white 'LinkedIn')](https://www.linkedin.com/in/miguel-tomas/)
-- Discord: gamester7178
-- Email: game.gamester@gmail.com
+This is a personal tool. Support is self-provided.
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request or open an Issue with your request.
-
-**Commit your changes** following the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) format.
+This is a personal tool, contributions are not applicable.
 
 ## License
 

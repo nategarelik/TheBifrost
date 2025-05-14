@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEditor.PackageManager.Requests;
-using McpUnity.Unity;
+using MyPersonalMcp.Unity;
 using Newtonsoft.Json.Linq;
 
-namespace McpUnity.Resources
+namespace MyPersonalMcp.Resources
 {
     /// <summary>
     /// Resource for getting package information from the Unity Package Manager

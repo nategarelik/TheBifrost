@@ -1,7 +1,7 @@
 using Newtonsoft.Json.Linq;
-using McpUnity.Services;
+using MyPersonalMcp.Services;
 
-namespace McpUnity.Resources
+namespace MyPersonalMcp.Resources
 {
     /// <summary>
     /// Resource for retrieving all logs from the Unity console

@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using McpUnity.Unity;
-using McpUnity.Utils;
+using MyPersonalMcp.Unity;
+using MyPersonalMcp.Utils;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.TestTools.TestRunner.Api;
 using Newtonsoft.Json.Linq;
 
-namespace McpUnity.Services
+namespace MyPersonalMcp.Services
 {
     /// <summary>
     /// Service for accessing Unity Test Runner functionality
@@ -94,7 +94,7 @@ namespace McpUnity.Services
             _testRunnerApi.Execute(new ExecutionSettings(filter));
 
             return await WaitForCompletionAsync(
-                McpUnitySettings.Instance.RequestTimeoutSeconds);
+                MyPersonalMcpSettings.Instance.RequestTimeoutSeconds);
         }
         
         /// <summary>
@@ -182,7 +182,7 @@ namespace McpUnity.Services
             if (winner != _tcs.Task)
             {
                 _tcs.TrySetResult(
-                    McpUnitySocketHandler.CreateErrorResponse(
+                    MyPersonalMcpSocketHandler.CreateErrorResponse(
                         $"Test run timed out after {timeoutSeconds} seconds",
                         "test_runner_timeout"));
             }

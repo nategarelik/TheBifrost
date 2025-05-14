@@ -1,12 +1,12 @@
 using System;
 using System.Reflection;
-using McpUnity.Unity;
-using McpUnity.Utils;
+using MyPersonalMcp.Unity;
+using MyPersonalMcp.Utils;
 using UnityEngine;
 using UnityEditor;
 using Newtonsoft.Json.Linq;
 
-namespace McpUnity.Tools
+namespace MyPersonalMcp.Tools
 {
     /// <summary>
     /// Tool for updating component data in the Unity Editor
@@ -34,7 +34,7 @@ namespace McpUnity.Tools
             // Validate parameters - require either instanceId or objectPath
             if (!instanceId.HasValue && string.IsNullOrEmpty(objectPath))
             {
-                return McpUnitySocketHandler.CreateErrorResponse(
+                return MyPersonalMcpSocketHandler.CreateErrorResponse(
                     "Either 'instanceId' or 'objectPath' must be provided", 
                     "validation_error"
                 );
@@ -42,7 +42,7 @@ namespace McpUnity.Tools
             
             if (string.IsNullOrEmpty(componentName))
             {
-                return McpUnitySocketHandler.CreateErrorResponse(
+                return MyPersonalMcpSocketHandler.CreateErrorResponse(
                     "Required parameter 'componentName' not provided", 
                     "validation_error"
                 );
@@ -72,7 +72,7 @@ namespace McpUnity.Tools
                     
             if (gameObject == null)
             {
-                return McpUnitySocketHandler.CreateErrorResponse(
+                return MyPersonalMcpSocketHandler.CreateErrorResponse(
                     $"GameObject with path '{objectPath}' or instance ID {instanceId} not found", 
                     "not_found_error"
                 );
@@ -90,7 +90,7 @@ namespace McpUnity.Tools
                 Type componentType = FindComponentType(componentName);
                 if (componentType == null)
                 {
-                    return McpUnitySocketHandler.CreateErrorResponse(
+                    return MyPersonalMcpSocketHandler.CreateErrorResponse(
                         $"Component type '{componentName}' not found in Unity", 
                         "component_error"
                     );

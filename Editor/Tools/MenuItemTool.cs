@@ -1,12 +1,12 @@
 using System;
 using System.Threading.Tasks;
-using McpUnity.Unity;
-using McpUnity.Utils;
+using MyPersonalMcp.Unity;
+using MyPersonalMcp.Utils;
 using UnityEngine;
 using UnityEditor;
 using Newtonsoft.Json.Linq;
 
-namespace McpUnity.Tools
+namespace MyPersonalMcp.Tools
 {
     /// <summary>
     /// Tool for executing Unity Editor menu items
@@ -29,7 +29,7 @@ namespace McpUnity.Tools
             string menuPath = parameters["menuPath"]?.ToObject<string>();
             if (string.IsNullOrEmpty(menuPath))
             {
-                return McpUnitySocketHandler.CreateErrorResponse(
+                return MyPersonalMcpSocketHandler.CreateErrorResponse(
                     "Required parameter 'menuPath' not provided", 
                     "validation_error"
                 );

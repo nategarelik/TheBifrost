@@ -1,14 +1,14 @@
-using McpUnity.Utils;
+using MyPersonalMcp.Utils;
 using UnityEngine;
 using UnityEditor;
 
-namespace McpUnity.Unity
+namespace MyPersonalMcp.Unity
 {
     /// <summary>
     /// Editor window for controlling the MCP Unity Server.
     /// Provides UI for starting/stopping the server and configuring settings.
     /// </summary>
-    public class McpUnityEditorWindow : EditorWindow
+    public class MyPersonalMcpEditorWindow : EditorWindow
     {
         private GUIStyle _headerStyle;
         private GUIStyle _subHeaderStyle;
@@ -26,7 +26,7 @@ namespace McpUnity.Unity
         [MenuItem("Tools/MCP Unity/Server Window", false, 1)]
         public static void ShowWindow()
         {
-            var window = GetWindow<McpUnityEditorWindow>("MCP Unity");
+            var window = GetWindow<MyPersonalMcpEditorWindow>("MCP Unity");
             window.minSize = new Vector2(600, 400);
         }
 
@@ -57,7 +57,7 @@ namespace McpUnity.Unity
             
             // Version info at the bottom
             GUILayout.FlexibleSpace();
-            WrappedLabel($"MCP Unity v{McpUnitySettings.ServerVersion}", EditorStyles.miniLabel, GUILayout.Width(150));
+            WrappedLabel($"MCP Unity v{MyPersonalMcpSettings.ServerVersion}", EditorStyles.miniLabel, GUILayout.Width(150));
             
             EditorGUILayout.EndVertical();
         }
@@ -72,8 +72,8 @@ namespace McpUnity.Unity
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Status:", GUILayout.Width(120));
             
-            McpUnitySettings settings = McpUnitySettings.Instance;
-            McpUnityServer mcpUnityServer = McpUnityServer.Instance;
+            MyPersonalMcpSettings settings = MyPersonalMcpSettings.Instance;
+            MyPersonalMcpServer mcpUnityServer = MyPersonalMcpServer.Instance;
             string statusText = mcpUnityServer.IsListening ? "Server Online" : "Server Offline";
             Color statusColor = mcpUnityServer.IsListening  ? Color.green : Color.red;
             
@@ -110,10 +110,10 @@ namespace McpUnity.Unity
             // Test timeout setting
             EditorGUILayout.BeginHorizontal();
             int newTimeout = EditorGUILayout.IntField(new GUIContent("Request Timeout (seconds)", "Timeout in seconds for tool request"), settings.RequestTimeoutSeconds);
-            if (newTimeout < McpUnitySettings.RequestTimeoutMinimum)
+            if (newTimeout < MyPersonalMcpSettings.RequestTimeoutMinimum)
             {
-                newTimeout = McpUnitySettings.RequestTimeoutMinimum;
-                Debug.LogError($"Request timeout must be at least {McpUnitySettings.RequestTimeoutMinimum} seconds.");
+                newTimeout = MyPersonalMcpSettings.RequestTimeoutMinimum;
+                Debug.LogError($"Request timeout must be at least {MyPersonalMcpSettings.RequestTimeoutMinimum} seconds.");
             }
             
             if (newTimeout != settings.RequestTimeoutSeconds)

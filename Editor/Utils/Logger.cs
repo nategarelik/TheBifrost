@@ -1,7 +1,7 @@
 using UnityEngine;
-using McpUnity.Unity;
+using MyPersonalMcp.Unity;
 
-namespace McpUnity.Utils
+namespace MyPersonalMcp.Utils
 {
     /// <summary>
     /// Special logger to use inside the MCP Unity Editor project
@@ -16,7 +16,7 @@ namespace McpUnity.Utils
         /// <param name="message">Message to log</param>
         public static void LogInfo(string message)
         {
-            if (McpUnitySettings.Instance.EnableInfoLogs)
+            if (MyPersonalMcpSettings.Instance.EnableInfoLogs)
             {
                 Debug.Log($"{LogPrefix}{message}");
             }

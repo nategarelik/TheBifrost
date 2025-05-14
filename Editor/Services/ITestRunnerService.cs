@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using UnityEditor.TestTools.TestRunner.Api;
 
-namespace McpUnity.Services
+namespace MyPersonalMcp.Services
 {
     /// <summary>
     /// Interface for the test runner service

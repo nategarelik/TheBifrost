@@ -1,15 +1,15 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using McpUnity.Unity;
+using MyPersonalMcp.Unity;
 using UnityEngine;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using UnityEditor.TestTools.TestRunner.Api;
-using McpUnity.Services;
-using McpUnity.Utils;
+using MyPersonalMcp.Services;
+using MyPersonalMcp.Utils;
 
-namespace McpUnity.Tools
+namespace MyPersonalMcp.Tools
 {
     /// <summary>
     /// Tool for running Unity Test Runner tests

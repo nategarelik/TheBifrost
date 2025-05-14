@@ -1,27 +1,27 @@
 using System;
 using System.IO;
-using McpUnity.Utils;
+using MyPersonalMcp.Utils;
 using UnityEngine;
 using UnityEditor;
 
-namespace McpUnity.Unity
+namespace MyPersonalMcp.Unity
 {
     /// <summary>
     /// Handles persistence of MCP Unity settings
     /// </summary>
     [Serializable]
-    public class McpUnitySettings
+    public class MyPersonalMcpSettings
     {
         // Constants
         public const string ServerVersion = "1.0.0";
-        public const string PackageName = "com.gamelovers.mcp-unity";
+        public const string PackageName = "com.mycompany.mypersonalmcp";
         public const int RequestTimeoutMinimum = 10;
 
         private const string EnvUnityPort = "UNITY_PORT";
         private const string EnvUnityRequestTimeout = "UNITY_REQUEST_TIMEOUT";
-        private const string SettingsPath = "ProjectSettings/McpUnitySettings.json";
+        private const string SettingsPath = "ProjectSettings/MyPersonalMcpSettings.json";
         
-        private static McpUnitySettings _instance;
+        private static MyPersonalMcpSettings _instance;
 
         // Server settings
         public int Port { get; set; } = 8090;
@@ -38,13 +38,13 @@ namespace McpUnity.Unity
         /// <summary>
         /// Singleton instance of settings
         /// </summary>
-        public static McpUnitySettings Instance
+        public static MyPersonalMcpSettings Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new McpUnitySettings();
+                    _instance = new MyPersonalMcpSettings();
                 }
                 return _instance;
             }
@@ -53,7 +53,7 @@ namespace McpUnity.Unity
         /// <summary>
         /// Private constructor for singleton
         /// </summary>
-        private McpUnitySettings() 
+        private MyPersonalMcpSettings() 
         { 
             LoadSettings();
             VsCodeWorkspaceUtils.AddPackageCacheToWorkspace();
@@ -66,7 +66,7 @@ namespace McpUnity.Unity
         {
             try
             {
-                // Load settings from McpUnitySettings.json
+                // Load settings from MyPersonalMcpSettings.json
                 if (File.Exists(SettingsPath))
                 {
                     string json = File.ReadAllText(SettingsPath);
@@ -99,7 +99,7 @@ namespace McpUnity.Unity
         {
             try
             {
-                // Save settings to McpUnitySettings.json
+                // Save settings to MyPersonalMcpSettings.json
                 string json = JsonUtility.ToJson(this, true);
                 File.WriteAllText(SettingsPath, json);
 

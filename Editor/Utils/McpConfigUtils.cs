@@ -1,13 +1,13 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
-using McpUnity.Unity;
+using MyPersonalMcp.Unity;
 using UnityEngine;
 using UnityEditor;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace McpUnity.Utils
+namespace MyPersonalMcp.Utils
 {
     /// <summary>
     /// Utility class for MCP configuration operations
@@ -23,7 +23,7 @@ namespace McpUnity.Utils
             {
                 { "mcpServers", new Dictionary<string, object>
                     {
-                        { "mcp-unity", new Dictionary<string, object>
+                        { "MyPersonalMcpServer", new Dictionary<string, object>
                             {
                                 { "command", "node" },
                                 { "args", new[] { Path.Combine(GetServerPath(), "build", "index.js") } }
@@ -66,7 +66,7 @@ namespace McpUnity.Utils
         public static string GetServerPath()
         {
             // First, try to find the package info via Package Manager
-            var packageInfo = UnityEditor.PackageManager.PackageInfo.FindForAssetPath($"Packages/{McpUnitySettings.PackageName}");
+            var packageInfo = UnityEditor.PackageManager.PackageInfo.FindForAssetPath($"Packages/{MyPersonalMcpSettings.PackageName}");
                 
             if (packageInfo != null && !string.IsNullOrEmpty(packageInfo.resolvedPath))
             {
@@ -169,10 +169,10 @@ namespace McpUnity.Utils
                             existingConfig["mcpServers"] = new JObject();
                         }
                         
-                        // Add or update the mcp-unity server config
-                        if (mcpServers["mcp-unity"] != null)
+                        // Add or update the MyPersonalMcpServer server config
+                        if (mcpServers["MyPersonalMcpServer"] != null)
                         {
-                            ((JObject)existingConfig["mcpServers"])["mcp-unity"] = mcpServers["mcp-unity"];
+                            ((JObject)existingConfig["mcpServers"])["MyPersonalMcpServer"] = mcpServers["MyPersonalMcpServer"];
                         }
                         
                         // Write the updated config back to the file
