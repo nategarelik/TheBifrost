@@ -148,7 +148,7 @@ Installing this MCP Unity Server is a multi-step process:
 <summary><span style="font-size: 1.1em; font-weight: bold;">Option 1: Configure using Unity Editor</span></summary>
 
 1. Open the Unity Editor
-2. Navigate to Tools > MyPersonalMcp Server > Server Window
+2. Navigate to Tools > TheBifrost > Server Window
 3. Click on the "Configure" button for your AI LLM client.
 <!-- Removed configure client image -->
 
@@ -162,7 +162,7 @@ Installing this MCP Unity Server is a multi-step process:
 
 Open the MCP configuration file of your AI client (e.g. claude_desktop_config.json in Claude Desktop) and copy the following text:
 
-> Replace `ABSOLUTE/PATH/TO` with the absolute path to your TheBifrost installation or just copy the text from the Unity Editor MCP Server window (Tools > MyPersonalMcp Server > Server Window).
+> Replace `ABSOLUTE/PATH/TO` with the absolute path to your TheBifrost installation or just copy the text from the Unity Editor MCP Server window (Tools > TheBifrost > Server Window).
 
 ```json
 {
@@ -181,7 +181,7 @@ Open the MCP configuration file of your AI client (e.g. claude_desktop_config.js
 
 ## <a name="start-server"></a>Start Unity Editor MCP Server
 1. Open the Unity Editor
-2. Navigate to Tools > MCP Unity > Server Window
+2. Navigate to Tools > TheBifrost > Server Window
 3. Click "Start Server" to start the WebSocket server
 4. Open Claude Desktop or your AI Coding IDE (e.g. Cursor IDE, Windsurf IDE, etc.) and start executing Unity tools.
 <!-- Removed connect image -->
@@ -195,7 +195,7 @@ By default, the WebSocket server runs on port 8090. You can change this port in 
 <summary><span style="font-size: 1.1em; font-weight: bold;">Option 1: Using the Unity Editor</span></summary>
 
 1. Open the Unity Editor
-2. Navigate to Tools > MCP Unity > Server Window
+2. Navigate to Tools > TheBifrost > Server Window
 3. Change the "WebSocket Port" value to your desired port number
 4. Unity will setup the system environment variable UNITY_PORT to the new port number
 5. Restart the Node.js server
@@ -229,7 +229,7 @@ You can change depending on the OS you are using:
 <summary><span style="font-size: 1.1em; font-weight: bold;">Option 1: Windows OS</span></summary>
 
 1. Open the Unity Editor
-2. Navigate to Tools > MCP Unity > Server Window
+2. Navigate to Tools > TheBifrost > Server Window
 3. Change the "Request Timeout (seconds)" value to your desired timeout seconds
 4. Unity will setup the system environment variable UNITY_REQUEST_TIMEOUT to the new timeout value
 5. Restart the Node.js server
@@ -245,7 +245,7 @@ For non-Windows OS, you need to configure two places:
 ### In Editor Process Timeout
 
 1. Open the Unity Editor
-2. Navigate to Tools > MCP Unity > Server Window
+2. Navigate to Tools > TheBifrost > Server Window
 3. Change the "Request Timeout (seconds)" value to your desired timeout seconds
 
 ### WebSocket Timeout
