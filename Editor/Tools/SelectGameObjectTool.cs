@@ -1,12 +1,12 @@
 using System;
 using System.Threading.Tasks;
-using MyPersonalMcp.Unity;
-using MyPersonalMcp.Utils;
+using TheBifrost.Unity;
+using TheBifrost.Utils;
 using UnityEngine;
 using UnityEditor;
 using Newtonsoft.Json.Linq;
 
-namespace MyPersonalMcp.Tools
+namespace TheBifrost.Tools
 {
     /// <summary>
     /// Tool for selecting GameObjects in the Unity Editor
@@ -32,7 +32,7 @@ namespace MyPersonalMcp.Tools
             // Validate parameters - require either objectPath or instanceId
             if (string.IsNullOrEmpty(objectPath) && !instanceId.HasValue)
             {
-                return MyPersonalMcpSocketHandler.CreateErrorResponse(
+                return TheBifrostSocketHandler.CreateErrorResponse(
                     "Required parameter 'objectPath' or 'instanceId' not provided", 
                     "validation_error"
                 );

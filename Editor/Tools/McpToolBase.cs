@@ -53,7 +53,7 @@ namespace TheBifrost.Tools
         {
             // Default implementation for tools that don't override this.
             // Indicate that this method should have been overridden if IsAsync is false.
-            return MyPersonalMcp.Unity.MyPersonalMcpSocketHandler.CreateErrorResponse(
+            return TheBifrost.Unity.TheBifrostSocketHandler.CreateErrorResponse(
                 "Execute must be overridden if IsAsync is false.", 
                 "implementation_error"
             );

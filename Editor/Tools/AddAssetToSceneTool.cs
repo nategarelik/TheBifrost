@@ -2,10 +2,10 @@ using System;
 using UnityEngine;
 using UnityEditor;
 using Newtonsoft.Json.Linq;
-using MyPersonalMcp.Unity;
-using MyPersonalMcp.Utils;
+using TheBifrost.Unity;
+using TheBifrost.Utils;
 
-namespace MyPersonalMcp.Tools
+namespace TheBifrost.Tools
 {
     /// <summary>
     /// Tool for adding assets from the AssetDatabase to the Unity scene
@@ -42,7 +42,7 @@ namespace MyPersonalMcp.Tools
             // Validate parameters - require either assetPath or guid
             if (string.IsNullOrEmpty(assetPath) && string.IsNullOrEmpty(guid))
             {
-                return MyPersonalMcpSocketHandler.CreateErrorResponse(
+                return TheBifrostSocketHandler.CreateErrorResponse(
                     "Required parameter 'assetPath' or 'guid' not provided", 
                     "validation_error"
                 );
@@ -54,7 +54,7 @@ namespace MyPersonalMcp.Tools
                 assetPath = AssetDatabase.GUIDToAssetPath(guid);
                 if (string.IsNullOrEmpty(assetPath))
                 {
-                    return MyPersonalMcpSocketHandler.CreateErrorResponse(
+                    return TheBifrostSocketHandler.CreateErrorResponse(
                         $"Asset with GUID '{guid}' not found", 
                         "not_found_error"
                     );
@@ -65,7 +65,7 @@ namespace MyPersonalMcp.Tools
             UnityEngine.Object asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
             if (asset == null)
             {
-                return MyPersonalMcpSocketHandler.CreateErrorResponse(
+                return TheBifrostSocketHandler.CreateErrorResponse(
                     $"Failed to load asset at path '{assetPath}'", 
                     "not_found_error"
                 );
@@ -77,7 +77,7 @@ namespace MyPersonalMcp.Tools
             
             if (!canInstantiate)
             {
-                return MyPersonalMcpSocketHandler.CreateErrorResponse(
+                return TheBifrostSocketHandler.CreateErrorResponse(
                     $"Asset of type '{asset.GetType().Name}' cannot be instantiated in the scene", 
                     "invalid_asset_type"
                 );
@@ -124,7 +124,7 @@ namespace MyPersonalMcp.Tools
             }
             catch (Exception ex)
             {
-                return MyPersonalMcpSocketHandler.CreateErrorResponse(
+                return TheBifrostSocketHandler.CreateErrorResponse(
                     $"Error instantiating asset: {ex.Message}", 
                     "instantiation_error"
                 );

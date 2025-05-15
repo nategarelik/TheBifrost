@@ -1,12 +1,12 @@
 using System;
 using System.Threading.Tasks;
-using MyPersonalMcp.Unity;
-using MyPersonalMcp.Utils;
+using TheBifrost.Unity;
+using TheBifrost.Utils;
 using UnityEngine;
 using UnityEditor;
 using Newtonsoft.Json.Linq;
 
-namespace MyPersonalMcp.Tools
+namespace TheBifrost.Tools
 {
     /// <summary>
     /// Tool for executing Unity Editor menu items
@@ -29,7 +29,7 @@ namespace MyPersonalMcp.Tools
             string menuPath = parameters["menuPath"]?.ToObject<string>();
             if (string.IsNullOrEmpty(menuPath))
             {
-                return MyPersonalMcpSocketHandler.CreateErrorResponse(
+                return TheBifrostSocketHandler.CreateErrorResponse(
                     "Required parameter 'menuPath' not provided", 
                     "validation_error"
                 );

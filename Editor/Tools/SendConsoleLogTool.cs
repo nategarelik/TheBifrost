@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
-using MyPersonalMcp.Unity;
+using TheBifrost.Unity;
 using UnityEngine;
 using Newtonsoft.Json.Linq;
 
-namespace MyPersonalMcp.Tools
+namespace TheBifrost.Tools
 {
     /// <summary>
     /// Tool for sending notification messages to the Unity console
@@ -28,7 +28,7 @@ namespace MyPersonalMcp.Tools
  
             if (string.IsNullOrEmpty(message))
             {
-                return MyPersonalMcpSocketHandler.CreateErrorResponse(
+                return TheBifrostSocketHandler.CreateErrorResponse(
                     "Required parameter 'message' not provided", 
                     "validation_error"
                 );

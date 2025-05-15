@@ -1,15 +1,15 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using MyPersonalMcp.Unity;
+using TheBifrost.Unity;
 using UnityEngine;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using UnityEditor.TestTools.TestRunner.Api;
-using MyPersonalMcp.Services;
-using MyPersonalMcp.Utils;
+using TheBifrost.Services;
+using TheBifrost.Utils;
 
-namespace MyPersonalMcp.Tools
+namespace TheBifrost.Tools
 {
     /// <summary>
     /// Tool for running Unity Test Runner tests
