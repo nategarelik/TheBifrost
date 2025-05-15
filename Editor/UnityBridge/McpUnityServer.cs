@@ -23,13 +23,13 @@ namespace TheBifrost.Unity
     {
         private static TheBifrostServer _instance;
         
-        private readonly Dictionary<string, MyPersonalMcp.Tools.McpToolBase> _tools = new Dictionary<string, MyPersonalMcp.Tools.McpToolBase>();
-        private readonly Dictionary<string, MyPersonalMcp.Resources.McpResourceBase> _resources = new Dictionary<string, MyPersonalMcp.Resources.McpResourceBase>();
+        private readonly Dictionary<string, TheBifrost.Tools.McpToolBase> _tools = new Dictionary<string, TheBifrost.Tools.McpToolBase>();
+        private readonly Dictionary<string, TheBifrost.Resources.McpResourceBase> _resources = new Dictionary<string, TheBifrost.Resources.McpResourceBase>();
         
         private WebSocketServer _webSocketServer;
         private CancellationTokenSource _cts;
-        private MyPersonalMcp.Services.TestRunnerService _testRunnerService;
-        private MyPersonalMcp.Services.ConsoleLogsService _consoleLogsService;
+        private TheBifrost.Services.TestRunnerService _testRunnerService;
+        private TheBifrost.Services.ConsoleLogsService _consoleLogsService;
 
         /// <summary>
         /// Static constructor that gets called when Unity loads due to InitializeOnLoad attribute

@@ -1,14 +1,14 @@
-using MyPersonalMcp.Utils;
+using TheBifrost.Utils;
 using UnityEngine;
 using UnityEditor;
 
-namespace MyPersonalMcp.Unity
+namespace TheBifrost.Unity
 {
     /// <summary>
     /// Editor window for controlling the MCP Unity Server.
     /// Provides UI for starting/stopping the server and configuring settings.
     /// </summary>
-    public class MyPersonalMcpEditorWindow : EditorWindow
+    public class TheBifrostEditorWindow : EditorWindow
     {
         private GUIStyle _headerStyle;
         private GUIStyle _subHeaderStyle;
@@ -26,7 +26,7 @@ namespace MyPersonalMcp.Unity
         [MenuItem("Tools/MCP Unity/Server Window", false, 1)]
         public static void ShowWindow()
         {
-            var window = GetWindow<MyPersonalMcpEditorWindow>("MCP Unity");
+            var window = GetWindow<TheBifrostEditorWindow>("The Bifrost");
             window.minSize = new Vector2(600, 400);
         }
 
@@ -38,7 +38,7 @@ namespace MyPersonalMcp.Unity
             
             // Header
             EditorGUILayout.Space();
-            WrappedLabel("MCP Unity", _headerStyle);
+            WrappedLabel("The Bifrost", _headerStyle);
             EditorGUILayout.Space();
             
             // Tabs
@@ -57,7 +57,7 @@ namespace MyPersonalMcp.Unity
             
             // Version info at the bottom
             GUILayout.FlexibleSpace();
-            WrappedLabel($"MCP Unity v{MyPersonalMcpSettings.ServerVersion}", EditorStyles.miniLabel, GUILayout.Width(150));
+            WrappedLabel($"The Bifrost v{TheBifrostSettings.ServerVersion}", EditorStyles.miniLabel, GUILayout.Width(150));
             
             EditorGUILayout.EndVertical();
         }
@@ -72,8 +72,8 @@ namespace MyPersonalMcp.Unity
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Status:", GUILayout.Width(120));
             
-            MyPersonalMcpSettings settings = MyPersonalMcpSettings.Instance;
-            MyPersonalMcpServer mcpUnityServer = MyPersonalMcpServer.Instance;
+            TheBifrostSettings settings = TheBifrostSettings.Instance;
+            TheBifrostServer mcpUnityServer = TheBifrostServer.Instance;
             string statusText = mcpUnityServer.IsListening ? "Server Online" : "Server Offline";
             Color statusColor = mcpUnityServer.IsListening  ? Color.green : Color.red;
             
@@ -100,8 +100,8 @@ namespace MyPersonalMcp.Unity
                 settings.SaveSettings();
                 mcpUnityServer.StopServer();
                 EditorUtility.DisplayDialog("Restart MCP Client",
-                    "Please restart your MCP Client (Windsurf, Cursor, Calude Destktop, etc.) to apply the changes.",
-                    "OK");
+                "Please restart your MCP Client (Windsurf, Cursor, Claude Desktop, etc.) to apply the changes.",
+                "OK");
             }
             EditorGUILayout.EndHorizontal();
             
@@ -110,10 +110,10 @@ namespace MyPersonalMcp.Unity
             // Test timeout setting
             EditorGUILayout.BeginHorizontal();
             int newTimeout = EditorGUILayout.IntField(new GUIContent("Request Timeout (seconds)", "Timeout in seconds for tool request"), settings.RequestTimeoutSeconds);
-            if (newTimeout < MyPersonalMcpSettings.RequestTimeoutMinimum)
+            if (newTimeout < TheBifrostSettings.RequestTimeoutMinimum)
             {
-                newTimeout = MyPersonalMcpSettings.RequestTimeoutMinimum;
-                Debug.LogError($"Request timeout must be at least {MyPersonalMcpSettings.RequestTimeoutMinimum} seconds.");
+                newTimeout = TheBifrostSettings.RequestTimeoutMinimum;
+                Debug.LogError($"Request timeout must be at least {TheBifrostSettings.RequestTimeoutMinimum} seconds.");
             }
             
             if (newTimeout != settings.RequestTimeoutSeconds)
@@ -271,9 +271,9 @@ namespace MyPersonalMcp.Unity
             // Begin scrollable area
             _helpTabScrollPosition = EditorGUILayout.BeginScrollView(_helpTabScrollPosition);
             
-            WrappedLabel("About MCP Unity", _subHeaderStyle);
+            WrappedLabel("About The Bifrost", _subHeaderStyle);
             EditorGUILayout.BeginVertical(_boxStyle);
-            WrappedLabel("MCP Unity is a Unity Editor integration of the Model Context Protocol (MCP), which enables standardized communication between AI models and applications.");
+            WrappedLabel("The Bifrost is a Unity Editor integration of the Model Context Protocol (MCP), which enables standardized communication between AI models and applications.");
             EditorGUILayout.Space();
             
             if (GUILayout.Button("Open MCP Protocol Documentation"))
@@ -290,7 +290,7 @@ namespace MyPersonalMcp.Unity
             EditorGUILayout.BeginVertical(_boxStyle);
             string ideIntegrationTooltip = "Add the Library/PackedCache folder to VSCode-like IDE workspaces so code can be indexed for the AI to access it. This improves code intelligence for Unity packages in VSCode, Cursor, and similar IDEs.";
             
-            WrappedLabel("These settings help improve code intelligence in VSCode-like IDEs by adding the Unity Package Cache to your workspace. This is automatically configured when the MCP Unity tool is opened in Unity.");
+            WrappedLabel("These settings help improve code intelligence in VSCode-like IDEs by adding the Unity Package Cache to your workspace. This is automatically configured when The Bifrost tool is opened in Unity.");
             EditorGUILayout.Space();
             
             // Add button to manually update workspace
@@ -490,7 +490,7 @@ namespace MyPersonalMcp.Unity
             if (_isInitialized) return;
             
             // Window title
-            titleContent = new GUIContent("MCP Unity");
+            titleContent = new GUIContent("The Bifrost");
             
             // Header style
             _headerStyle = new GUIStyle(EditorStyles.largeLabel)

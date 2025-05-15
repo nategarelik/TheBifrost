@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq;
 
-namespace MyPersonalMcp.Utils
+namespace TheBifrost.Utils
 {
     /// <summary>
     /// Manages VSCode-like IDE workspace integration for Unity projects

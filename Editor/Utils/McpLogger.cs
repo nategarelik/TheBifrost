@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace MyPersonalMcp.Utils
+namespace TheBifrost.Utils
 {
     /// <summary>
     /// Logger utility for MCP related logging
