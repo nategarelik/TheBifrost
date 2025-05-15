@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace MyPersonalMcp.Services
+namespace TheBifrost.Services
 {
     /// <summary>
     /// Service for managing Unity console logs

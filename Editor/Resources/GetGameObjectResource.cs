@@ -5,7 +5,7 @@ using UnityEngine;
 using Newtonsoft.Json.Linq;
 using UnityEditor;
 
-namespace MyPersonalMcp.Resources
+namespace TheBifrost.Resources
 {
     /// <summary>
     /// Resource for retrieving detailed information about a specific GameObject

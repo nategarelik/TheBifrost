@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEditor.PackageManager.Requests;
-using MyPersonalMcp.Unity;
+using TheBifrost.Unity;
 using Newtonsoft.Json.Linq;
 
-namespace MyPersonalMcp.Resources
+namespace TheBifrost.Resources
 {
     /// <summary>
     /// Resource for getting package information from the Unity Package Manager

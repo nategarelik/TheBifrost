@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEditor;
 using Newtonsoft.Json.Linq;
 
-namespace MyPersonalMcp.Resources
+namespace TheBifrost.Resources
 {
     /// <summary>
     /// Resource for retrieving all available Unity menu items

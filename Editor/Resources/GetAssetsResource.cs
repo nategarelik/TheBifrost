@@ -3,10 +3,10 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using MyPersonalMcp.Unity;
+using TheBifrost.Unity;
 using Newtonsoft.Json.Linq;
 
-namespace MyPersonalMcp.Resources
+namespace TheBifrost.Resources
 {
     /// <summary>
     /// Resource for getting asset information from the Unity Asset Database

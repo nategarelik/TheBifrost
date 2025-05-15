@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using MyPersonalMcp.Unity;
-using MyPersonalMcp.Utils;
+using TheBifrost.Unity;
+using TheBifrost.Utils;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.TestTools.TestRunner.Api;
 using Newtonsoft.Json.Linq;
 
-namespace MyPersonalMcp.Services
+namespace TheBifrost.Services
 {
     /// <summary>
     /// Service for accessing Unity Test Runner functionality

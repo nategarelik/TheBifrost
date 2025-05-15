@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MyPersonalMcp.Services;
+using TheBifrost.Services;
 using Newtonsoft.Json.Linq;
 using UnityEditor.TestTools.TestRunner.Api;
 
-namespace MyPersonalMcp.Resources
+namespace TheBifrost.Resources
 {
     /// <summary>
     /// Resource for getting available tests from Unity Test Runner

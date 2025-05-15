@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-namespace MyPersonalMcp.Services
+namespace TheBifrost.Services
 {
     /// <summary>
     /// Interface for the console logs service

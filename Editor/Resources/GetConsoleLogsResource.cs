@@ -1,7 +1,7 @@
 using Newtonsoft.Json.Linq;
-using MyPersonalMcp.Services;
+using TheBifrost.Services;
 
-namespace MyPersonalMcp.Resources
+namespace TheBifrost.Resources
 {
     /// <summary>
     /// Resource for retrieving all logs from the Unity console
