@@ -23,7 +23,7 @@ namespace TheBifrost.Unity
         private bool _tabsIndentationJson = false;
         private Vector2 _helpTabScrollPosition = Vector2.zero;
 
-        [MenuItem("Tools/MCP Unity/Server Window", false, 1)]
+        [MenuItem("Tools/The Bifrost/Server Window", false, 1)]
         public static void ShowWindow()
         {
             var window = GetWindow<TheBifrostEditorWindow>("The Bifrost");
@@ -454,7 +454,7 @@ namespace TheBifrost.Unity
             
             EditorGUILayout.BeginVertical(_boxStyle);
             
-            WrappedLabel("Created by CoderGamester", EditorStyles.boldLabel);
+            WrappedLabel("Created by Nathaniel Garelik", EditorStyles.boldLabel);
             EditorGUILayout.Space();
             
             WrappedLabel("For issues, feedback, or contributions, please visit:");

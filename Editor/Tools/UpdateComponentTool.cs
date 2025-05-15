@@ -1,12 +1,12 @@
 using System;
 using System.Reflection;
-using MyPersonalMcp.Unity;
-using MyPersonalMcp.Utils;
+using TheBifrost.Unity;
+using TheBifrost.Utils;
 using UnityEngine;
 using UnityEditor;
 using Newtonsoft.Json.Linq;
 
-namespace MyPersonalMcp.Tools
+namespace TheBifrost.Tools
 {
     /// <summary>
     /// Tool for updating component data in the Unity Editor
@@ -34,7 +34,7 @@ namespace MyPersonalMcp.Tools
             // Validate parameters - require either instanceId or objectPath
             if (!instanceId.HasValue && string.IsNullOrEmpty(objectPath))
             {
-                return MyPersonalMcpSocketHandler.CreateErrorResponse(
+                return TheBifrostSocketHandler.CreateErrorResponse(
                     "Either 'instanceId' or 'objectPath' must be provided", 
                     "validation_error"
                 );
@@ -42,7 +42,7 @@ namespace MyPersonalMcp.Tools
             
             if (string.IsNullOrEmpty(componentName))
             {
-                return MyPersonalMcpSocketHandler.CreateErrorResponse(
+                return TheBifrostSocketHandler.CreateErrorResponse(
                     "Required parameter 'componentName' not provided", 
                     "validation_error"
                 );
@@ -72,13 +72,13 @@ namespace MyPersonalMcp.Tools
                     
             if (gameObject == null)
             {
-                return MyPersonalMcpSocketHandler.CreateErrorResponse(
+                return TheBifrostSocketHandler.CreateErrorResponse(
                     $"GameObject with path '{objectPath}' or instance ID {instanceId} not found", 
                     "not_found_error"
                 );
             }
             
-            McpLogger.LogInfo($"[MCP Unity] Updating component '{componentName}' on GameObject '{gameObject.name}' (found by {identifier})");
+            McpLogger.LogInfo($"[The Bifrost] Updating component '{componentName}' on GameObject '{gameObject.name}' (found by {identifier})");
             
             // Try to find the component by name
             Component component = gameObject.GetComponent(componentName);
@@ -90,7 +90,7 @@ namespace MyPersonalMcp.Tools
                 Type componentType = FindComponentType(componentName);
                 if (componentType == null)
                 {
-                    return MyPersonalMcpSocketHandler.CreateErrorResponse(
+                    return TheBifrostSocketHandler.CreateErrorResponse(
                         $"Component type '{componentName}' not found in Unity", 
                         "component_error"
                     );
@@ -98,7 +98,7 @@ namespace MyPersonalMcp.Tools
                 
                 component = Undo.AddComponent(gameObject, componentType);
                 wasAdded = true;
-                McpLogger.LogInfo($"[MCP Unity] Added component '{componentName}' to GameObject '{gameObject.name}'");
+                McpLogger.LogInfo($"[The Bifrost] Added component '{componentName}' to GameObject '{gameObject.name}'");
             }
             
             // Update component fields
@@ -403,7 +403,7 @@ namespace MyPersonalMcp.Tools
             }
             catch (Exception ex)
             {
-                McpLogger.LogError($"[MCP Unity] Error converting value to type {targetType.Name}: {ex.Message}");
+                McpLogger.LogError($"[The Bifrost] Error converting value to type {targetType.Name}: {ex.Message}");
                 return null;
             }
         }
