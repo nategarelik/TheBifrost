@@ -41,10 +41,6 @@ namespace TheBifrost.Unity
             EditorApplication.quitting += Instance.StopServer;
 
             // Auto-restart server after domain reload
-            if (TheBifrostSettings.Instance.AutoStartServer)
-            {
-                Instance.StartServer();
-            }
         }
         
         /// <summary>
