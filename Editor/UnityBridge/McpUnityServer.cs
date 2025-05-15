@@ -5,23 +5,23 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 using System.Diagnostics;
-using MyPersonalMcp.Tools;
-using MyPersonalMcp.Resources;
-using MyPersonalMcp.Services;
-using MyPersonalMcp.Utils;
+using TheBifrost.Tools;
+using TheBifrost.Resources;
+using TheBifrost.Services;
+using TheBifrost.Utils;
 using WebSocketSharp.Server;
 using Debug = UnityEngine.Debug;
 
-namespace MyPersonalMcp.Unity
+namespace TheBifrost.Unity
 {
     /// <summary>
-    /// MCP Unity Server to communicate Node.js MCP server.
+    /// TheBifrost Server to communicate Node.js MCP server.
     /// Uses WebSockets to communicate with Node.js.
     /// </summary>
     [InitializeOnLoad]
-    public class MyPersonalMcpServer
+    public class TheBifrostServer
     {
-        private static MyPersonalMcpServer _instance;
+        private static TheBifrostServer _instance;
         
         private readonly Dictionary<string, McpToolBase> _tools = new Dictionary<string, McpToolBase>();
         private readonly Dictionary<string, McpResourceBase> _resources = new Dictionary<string, McpResourceBase>();
@@ -34,14 +34,14 @@ namespace MyPersonalMcp.Unity
         /// <summary>
         /// Static constructor that gets called when Unity loads due to InitializeOnLoad attribute
         /// </summary>
-        static MyPersonalMcpServer()
+        static TheBifrostServer()
         {
             // Initialize the singleton instance when Unity loads
             // This ensures the bridge is available as soon as Unity starts
             EditorApplication.quitting += Instance.StopServer;
 
             // Auto-restart server after domain reload
-            if (MyPersonalMcpSettings.Instance.AutoStartServer)
+            if (TheBifrostSettings.Instance.AutoStartServer)
             {
                 Instance.StartServer();
             }
@@ -50,13 +50,13 @@ namespace MyPersonalMcp.Unity
         /// <summary>
         /// Singleton instance accessor
         /// </summary>
-        public static MyPersonalMcpServer Instance
+        public static TheBifrostServer Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new MyPersonalMcpServer();
+                    _instance = new TheBifrostServer();
                 }
                 return _instance;
             }
@@ -73,9 +73,77 @@ namespace MyPersonalMcp.Unity
         public Dictionary<string, string> Clients { get; } = new Dictionary<string, string>();
 
         /// <summary>
+rost.Tools;
+using TheBifrost.Resources;
+using TheBifrost.Services;
+using TheBifrost.Utils;
+using WebSocketSharp.Server;
+using Debug = UnityEngine.Debug;
+
+namespace TheBifrost.Unity
+{
+    /// <summary>
+    /// TheBifrost Server to communicate Node.js MCP server.
+    /// Uses WebSockets to communicate with Node.js.
+    /// </summary>
+    [InitializeOnLoad]
+    public class TheBifrostServer
+    {
+        private static TheBifrostServer _instance;
+        
+        private readonly Dictionary<string, McpToolBase> _tools = new Dictionary<string, McpToolBase>();
+        private readonly Dictionary<string, McpResourceBase> _resources = new Dictionary<string, McpResourceBase>();
+        
+        private WebSocketServer _webSocketServer;
+        private CancellationTokenSource _cts;
+        private TestRunnerService _testRunnerService;
+        private ConsoleLogsService _consoleLogsService;
+
+        /// <summary>
+        /// Static constructor that gets called when Unity loads due to InitializeOnLoad attribute
+        /// </summary>
+        static TheBifrostServer()
+        {
+            // Initialize the singleton instance when Unity loads
+            // This ensures the bridge is available as soon as Unity starts
+            EditorApplication.quitting += Instance.StopServer;
+
+            // Auto-restart server after domain reload
+            if (TheBifrostSettings.Instance.AutoStartServer)
+            {
+                Instance.StartServer();
+            }
+        }
+        
+        /// <summary>
+        /// Singleton instance accessor
+        /// </summary>
+        public static TheBifrostServer Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new TheBifrostServer();
+                }
+                return _instance;
+            }
+        }
+        
+        /// <summary>
+        /// Current Listening state
+        /// </summary>
+        public bool IsListening => _webSocketServer?.IsListening ?? false;
+        
+        /// <summary>
+        /// Dictionary of connected clients with this server
+        /// </summary>
+        public Dictionary<string, string> Clients { get; } = new Dictionary<string, string>();
+
+        /// <summary>
         /// Private constructor to enforce singleton pattern
         /// </summary>
-        private MyPersonalMcpServer()
+        private TheBifrostServer()
         {
             InitializeServices();
             RegisterResources();
@@ -98,14 +166,14 @@ namespace MyPersonalMcp.Unity
                 }
                 
                 // Create a new WebSocket server
-                _webSocketServer = new WebSocketServer($"ws://localhost:{MyPersonalMcpSettings.Instance.Port}");
+                _webSocketServer = new WebSocketServer($"ws://localhost:{TheBifrostSettings.Instance.Port}");
                 // Add the MCP service endpoint with a handler that references this server
-                _webSocketServer.AddWebSocketService("/MyPersonalMcp", () => new MyPersonalMcpSocketHandler(this));
+                _webSocketServer.AddWebSocketService("/TheBifrost", () => new TheBifrostSocketHandler(this));
                 
                 // Start the server
                 _webSocketServer.Start();
                 
-                McpLogger.LogInfo($"WebSocket server started on port {MyPersonalMcpSettings.Instance.Port}");
+                McpLogger.LogInfo($"WebSocket server started on port {TheBifrostSettings.Instance.Port}");
             }
             catch (Exception ex)
             {
@@ -240,9 +308,9 @@ namespace MyPersonalMcp.Unity
                 string serverPath = McpConfigUtils.GetServerPath();
                 
                 // Check if the server path is valid
-                if (serverPath.StartsWith("[MCP Unity] Could not locate Server directory"))
+                if (serverPath.StartsWith("[TheBifrost] Could not locate Server directory"))
                 {
-                    McpLogger.LogError("Could not locate Server directory. Please check the installation of the MCP Unity package.");
+                    McpLogger.LogError("Could not locate Server directory. Please check the installation of TheBifrost package.");
                     return false;
                 }
                 

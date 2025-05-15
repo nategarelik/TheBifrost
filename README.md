@@ -4,44 +4,44 @@
 [![](https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white 'Node.js')](https://nodejs.org/en/download/)
 [![](https://img.shields.io/badge/License-MIT-red.svg 'MIT License')](License.md)
 
-```                                                                        
-                              ,/(/.   *(/,                                  
-                          */(((((/.   *((((((*.                             
-                     .*((((((((((/.   *((((((((((/.                         
-                 ./((((((((((((((/    *((((((((((((((/,                     
-             ,/(((((((((((((/*.           */(((((((((((((/*.                
-            ,%%#((/((((((*                    ,/(((((/(#&@@(                
-            ,%%##%%##((((((/*.             ,/((((/(#&@@@@@@(                
-            ,%%######%%##((/(((/*.    .*/(((//(%@@@@@@@@@@@(                
-            ,%%####%#(%%#%%##((/((((((((//#&@@@@@@&@@@@@@@@(                
-            ,%%####%(    /#%#%%%##(//(#@@@@@@@%,   #@@@@@@@(                
-            ,%%####%(        *#%###%@@@@@@(        #@@@@@@@(                
-            ,%%####%(           #%#%@@@@,          #@@@@@@@(                
-            ,%%##%%%(           #%#%@@@@,          #@@@@@@@(                
-            ,%%%#*              #%#%@@@@,             *%@@@(                
-            .,      ,/##*.      #%#%@@@@,     ./&@#*      *`                
-                ,/#%#####%%#/,  #%#%@@@@, ,/&@@@@@@@@@&\.                    
-                 `*#########%%%%###%@@@@@@@@@@@@@@@@@@&*´                   
-                    `*%%###########%@@@@@@@@@@@@@@&*´                        
-                        `*%%%######%@@@@@@@@@@&*´                            
-                            `*#%%##%@@@@@&*´                                 
-                               `*%#%@&*´                                     
-                                                       
-     ███╗   ███╗ ██████╗██████╗         ██╗   ██╗███╗   ██╗██╗████████╗██╗   ██╗
-     ████╗ ████║██╔════╝██╔══██╗        ██║   ██║████╗  ██║██║╚══██╔══╝╚██╗ ██╔╝
-     ██╔████╔██║██║     ██████╔╝        ██║   ██║██╔██╗ ██║██║   ██║    ╚████╔╝ 
-     ██║╚██╔╝██║██║     ██╔═══╝         ██║   ██║██║╚██╗██║██║   ██║     ╚██╔╝  
-     ██║ ╚═╝ ██║╚██████╗██║             ╚██████╔╝██║ ╚████║██║   ██║      ██║
-     ╚═╝     ╚═╝ ╚═════╝╚═╝              ╚═════╝ ╚═╝  ╚═══╝╚═╝   ╚═╝      ╚═╝
+```
+                               ,/(/.   *(/,
+                           */(((((/.   *((((((*.
+                      .*((((((((((/.   *((((((((((/.
+                  ./((((((((((((((/    *((((((((((((((/,
+              ,/(((((((((((((/*.           */(((((((((((((/*.
+             ,%%#((/((((((*                    ,/(((((/(#&@@(
+             ,%%##%%##((((((/*.             ,/((((/(#&@@@@@@(
+             ,%%######%%##((/(((/*.    .*/(((//(%@@@@@@@@@@@(
+             ,%%####%#(%%#%%##((/((((((((//#&@@@@@@&@@@@@@@@(
+             ,%%####%(    /#%#%%%##(//(#@@@@@@@%,   #@@@@@@@(
+             ,%%####%(        *#%###%@@@@@@(        #@@@@@@@(
+             ,%%####%(           #%#%@@@@,          #@@@@@@@(
+             ,%%##%%%(           #%#%@@@@,          #@@@@@@@(
+             ,%%%#*              #%#%@@@@,             *%@@@(
+             .,      ,/##*.      #%#%@@@@,     ./&@#*      *`
+                 ,/#%#####%%#/,  #%#%@@@@, ,/&@@@@@@@@@&\.
+                  `*#########%%%%###%@@@@@@@@@@@@@@@@@@&*´
+                     `*%%###########%@@@@@@@@@@@@@@&*´
+                         `*%%%######%@@@@@@@@@@&*´
+                             `*#%%##%@@@@@&*´
+                                `*%#%@&*´
+
+      ███╗   ███╗ ██████╗██████╗         ██╗   ██╗███╗   ██╗██╗████████╗██╗   ██╗
+      ████╗ ████║██╔════╝██╔══██╗        ██║   ██║████╗  ██║██║╚══██╔══╝╚██╗ ██╔╝
+      ██╔████╔██║██║     ██████╔╝        ██║   ██║██╔██╗ ██║██║   ██║    ╚████╔╝
+      ██║╚██╔╝██║██║     ██╔═══╝         ██║   ██║██║╚██╗██║██║   ██║     ╚██╔╝
+      ██║ ╚═╝ ██║╚██████╗██║             ╚██████╔╝██║ ╚████║██║   ██║      ██║
+      ╚═╝     ╚═╝ ╚═════╝╚═╝              ╚═════╝ ╚═╝  ╚═══╝╚═╝   ╚═╝      ╚═╝
 ```
 
-The Bifrost is a personalized implementation of the Model Context Protocol for Unity Editor, designed for private use to allow AI assistants to interact with your Unity projects. This package provides a bridge between Unity and a Node.js server that implements the MCP protocol, enabling AI agents to execute operations within the Unity Editor.
+The Bifrost is a personalized implementation of the Model Context Protocol for Unity Editor by Nathaniel Garelik, designed for private use to allow AI assistants to interact with your Unity projects. This package provides a bridge between Unity and a Node.js server that implements the MCP protocol, enabling AI agents to execute operations within the Unity Editor.
 
 ## Features
 
 ### IDE Integration - Package Cache Access
 
-MCP Unity provides automatic integration with VSCode-like IDEs (Visual Studio Code, Cursor, Windsurf) by adding the Unity `Library/PackedCache` folder to your workspace. This feature:
+The Bifrost provides automatic integration with VSCode-like IDEs (Visual Studio Code, Cursor, Windsurf) by adding the Unity `Library/PackedCache` folder to your workspace. This feature:
 
 - Improves code intelligence for Unity packages
 - Enables better autocompletion and type information for Unity packages
@@ -112,7 +112,7 @@ Installing this MCP Unity Server is a multi-step process:
 <!-- Removed package manager image -->
 
 ### Step 2: Install Node.js
-> To run MCP Unity server, you'll need to have Node.js 18 or later installed on your computer:
+> To run The Bifrost server, you'll need to have Node.js 18 or later installed on your computer:
 
 <details>
 <summary><span style="font-size: 1.1em; font-weight: bold;">Windows</span></summary>
@@ -179,7 +179,7 @@ Open the MCP configuration file of your AI client (e.g. claude_desktop_config.js
 
 </details>
 
-## <a name="start-server"></a>Start Unity Editor MCP Server
+## <a name="start-server"></a>Start The Bifrost Server
 1. Open the Unity Editor
 2. Navigate to Tools > TheBifrost > Server Window
 3. Click "Start Server" to start the WebSocket server
@@ -251,11 +251,11 @@ For non-Windows OS, you need to configure two places:
 ### WebSocket Timeout
 
 1. Set the UNITY_REQUEST_TIMEOUT environment variable in the terminal
-    - Powershell
+   - Powershell
    ```powershell
    $env:UNITY_REQUEST_TIMEOUT = "300"
    ```
-    - Command Prompt/Terminal
+   - Command Prompt/Terminal
    ```cmd
    set UNITY_REQUEST_TIMEOUT=300
    ```
@@ -264,7 +264,7 @@ For non-Windows OS, you need to configure two places:
 
 </details>
 
-> [!TIP]  
+> [!TIP]
 > The timeout between your AI Coding IDE (e.g., Claude Desktop, Cursor IDE, Windsurf IDE) and the MCP Server depends on the IDE.
 
 ## <a name="debug-server"></a>Debugging the Server
@@ -272,7 +272,7 @@ For non-Windows OS, you need to configure two places:
 <details>
 <summary><span style="font-size: 1.1em; font-weight: bold;">Building the Node.js Server</span></summary>
 
-The MCP Unity server is built using Node.js . It requires to compile the TypeScript code to JavaScript in the `build` directory.
+The Bifrost server is built using Node.js . It requires to compile the TypeScript code to JavaScript in the `build` directory.
 To build the server, open a terminal and:
 
 1. Navigate to the Server directory:
@@ -296,7 +296,7 @@ To build the server, open a terminal and:
    ```
 
 </details>
-   
+
 <details>
 <summary><span style="font-size: 1.1em; font-weight: bold;">Debugging with MCP Inspector</span></summary>
 
@@ -338,7 +338,7 @@ Don't forget to shutdown the server with `Ctrl + C` before closing the terminal 
 
 - Ensure the WebSocket server is running (check the Server Window in Unity)
 - Send a console log message from MCP client to force a reconnection between MCP client and Unity server
-- Change the port number in the Unity Editor MCP Server window. (Tools > MCP Unity > Server Window)
+- Change the port number in the Unity Editor The Bifrost Server window. (Tools > TheBifrost > Server Window)
 </details>
 
 <details>
@@ -358,7 +358,7 @@ Error:
 Connection failed: Unknown error
 ```
 
-This error occurs because the bridge connection is lost when the domain reloads upon switching to Play Mode.  
+This error occurs because the bridge connection is lost when the domain reloads upon switching to Play Mode.
 The workaround is to turn off **Reload Domain** in **Edit > Project Settings > Editor > "Enter Play Mode Settings"**.
 </details>
 

@@ -1,7 +1,7 @@
 {
-  "name": "com.user.my-personal-mcp",
+  "name": "com.nathanielgarelik.thebifrost",
   "displayName": "TheBifrost MCP Server",
-  "author": "Nate Garelik",
+  "author": "Nathaniel Garelik",
   "version": "1.0.2",
   "unity": "2022.3",
   "license": "MIT",

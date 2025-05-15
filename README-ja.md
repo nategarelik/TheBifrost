@@ -1,4 +1,4 @@
-# MyPersonalMcpServer エディター (ゲームエンジン)
+# The Bifrost エディター (ゲームエンジン)
 
 [![](https://img.shields.io/badge/Unity-000000?style=flat&logo=unity&logoColor=white 'Unity')](https://unity.com/releases/editor/archive)
 [![](https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white 'Node.js')](https://nodejs.org/en/download/)
@@ -7,44 +7,44 @@
 | [English](../README.md) | [🇨🇳简体中文](../README_zh-CN.md) | [🇯🇵日本語](README-ja.md) |
 |----------------------|---------------------------------|----------------------|
 
-```                                                                        
-                              ,/(/.   *(/,                                  
-                          */(((((/.   *((((((*.                             
-                     .*((((((((((/.   *((((((((((/.                         
-                 ./((((((((((((((/    *((((((((((((((/,                     
-             ,/(((((((((((((/*.           */(((((((((((((/*.                
-            ,%%#((/((((((*                    ,/(((((/(#&@@(                
-            ,%%##%%##((((((/*.             ,/((((/(#&@@@@@@(                
-            ,%%######%%##((/(((/*.    .*/(((//(%@@@@@@@@@@@(                
-            ,%%####%#(%%#%%##((/((((((((//#&@@@@@@&@@@@@@@@(                
-            ,%%####%(    /#%#%%%##(//(#@@@@@@@%,   #@@@@@@@(                
-            ,%%####%(        *#%###%@@@@@@(        #@@@@@@@(                
-            ,%%####%(           #%#%@@@@,          #@@@@@@@(                
-            ,%%##%%%(           #%#%@@@@,          #@@@@@@@(                
-            ,%%%#*              #%#%@@@@,             *%@@@(                
-            .,      ,/##*.      #%#%@@@@,     ./&@#*      *`                
-                ,/#%#####%%#/,  #%#%@@@@, ,/&@@@@@@@@@&\.                    
-                 `*#########%%%%###%@@@@@@@@@@@@@@@@@@&*´                   
-                    `*%%###########%@@@@@@@@@@@@@@&*´                        
-                        `*%%%######%@@@@@@@@@@&*´                            
-                            `*#%%##%@@@@@&*´                                 
-                               `*%#%@&*´                                     
-                                                        
-     ███╗   ███╗ ██████╗██████╗         ██╗   ██╗███╗   ██╗██╗████████╗██╗   ██╗
-     ████╗ ████║██╔════╝██╔══██╗        ██║   ██║████╗  ██║██║╚══██╔══╝╚██╗ ██╔╝
-     ██╔████╔██║██║     ██████╔╝        ██║   ██║██╔██╗ ██║██║   ██║    ╚████╔╝ 
-     ██║╚██╔╝██║██║     ██╔═══╝         ██║   ██║██║╚██╗██║██║   ██║     ╚██╔╝  
-     ██║ ╚═╝ ██║╚██████╗██║             ╚██████╔╝██║ ╚████║██║   ██║      ██║
-     ╚═╝     ╚═╝ ╚═════╝╚═╝              ╚═════╝ ╚═╝  ╚═══╝╚═╝   ╚═╝      ╚═╝
+```
+                               ,/(/.   *(/,
+                           */(((((/.   *((((((*.
+                      .*((((((((((/.   *((((((((((/.
+                  ./((((((((((((((/    *((((((((((((((/,
+              ,/(((((((((((((/*.           */(((((((((((((/*.
+             ,%%#((/((((((*                    ,/(((((/(#&@@(
+             ,%%##%%##((((((/*.             ,/((((/(#&@@@@@@(
+             ,%%######%%##((/(((/*.    .*/(((//(%@@@@@@@@@@@(
+             ,%%####%#(%%#%%##((/((((((((//#&@@@@@@&@@@@@@@@(
+             ,%%####%(    /#%#%%%##(//(#@@@@@@@%,   #@@@@@@@(
+             ,%%####%(        *#%###%@@@@@@(        #@@@@@@@(
+             ,%%####%(           #%#%@@@@,          #@@@@@@@(
+             ,%%##%%%(           #%#%@@@@,          #@@@@@@@(
+             ,%%%#*              #%#%@@@@,             *%@@@(
+             .,      ,/##*.      #%#%@@@@,     ./&@#*      *`
+                 ,/#%#####%%#/,  #%#%@@@@, ,/&@@@@@@@@@&\.
+                  `*#########%%%%###%@@@@@@@@@@@@@@@@@@&*´
+                     `*%%###########%@@@@@@@@@@@@@@&*´
+                         `*%%%######%@@@@@@@@@@&*´
+                             `*#%%##%@@@@@&*´
+                                `*%#%@&*´
+
+      ███╗   ███╗ ██████╗██████╗         ██╗   ██╗███╗   ██╗██╗████████╗██╗   ██╗
+      ████╗ ████║██╔════╝██╔══██╗        ██║   ██║████╗  ██║██║╚══██╔══╝╚██╗ ██╔╝
+      ██╔████╔██║██║     ██████╔╝        ██║   ██║██╔██╗ ██║██║   ██║    ╚████╔╝
+      ██║╚██╔╝██║██║     ██╔═══╝         ██║   ██║██║╚██╗██║██║   ██║     ╚██╔╝
+      ██║ ╚═╝ ██║╚██████╗██║             ╚██████╔╝██║ ╚████║██║   ██║      ██║
+      ╚═╝     ╚═╝ ╚═════╝╚═╝              ╚═════╝ ╚═╝  ╚═══╝╚═╝   ╚═╝      ╚═╝
 ```
 
-MyPersonalMcpServerは、Unityエディター向けのModel Context Protocolのパーソナライズされた実装であり、AIアシスタントがUnityプロジェクトと対話できるようにするためのプライベート利用を目的としています。このパッケージは、UnityとMCPプロトコルを実装するNode.jsサーバー間のブリッジを提供し、AIエージェントがUnityエディター内で操作を実行できるようにします。
+The Bifrostは、Unityエディター向けのModel Context Protocolのパーソナライズされた実装であり、Nathaniel Garelikによって、AIアシスタントがUnityプロジェクトと対話できるようにするためのプライベート利用を目的としています。このパッケージは、UnityとMCPプロトコルを実装するNode.jsサーバー間のブリッジを提供し、AIエージェントがUnityエディター内で操作を実行できるようにします。
 
 ## 機能
 
 ### IDE統合 - パッケージキャッシュアクセス
 
-MCP Unityは、Unityの`Library/PackedCache`フォルダーをワークスペースに追加することで、VSCode系IDE（Visual Studio Code、Cursor、Windsurf）との自動統合を提供します。この機能により：
+The Bifrostは、Unityの`Library/PackedCache`フォルダーをワークスペースに追加することで、VSCode系IDE（Visual Studio Code、Cursor、Windsurf）との自動統合を提供します。この機能により：
 
 - Unityパッケージのコードインテリジェンスが向上
 - Unityパッケージのより良いオートコンプリートと型情報が有効化
@@ -105,17 +105,17 @@ MCP Unityは、Unityの`Library/PackedCache`フォルダーをワークスペー
 
 このMCP Unityサーバーのインストールは複数ステップのプロセスです：
 
-### ステップ1: Unityパッケージマネージャー経由でMyPersonalMcpServerパッケージをインストール
+### ステップ1: Unityパッケージマネージャー経由でThe Bifrostパッケージをインストール
 1. Unityパッケージマネージャーを開く（Window > Package Manager）
 2. 左上隅の"+"ボタンをクリック
 3. "Add package from git URL..."を選択
-4. 入力: `[あなたのMyPersonalMcpServerプライベートGit URL]` (ローカルパッケージの場合はディスクから追加)
+4. 入力: `[あなたのThe BifrostプライベートGit URL]` (ローカルパッケージの場合はディスクから追加)
 5. "Add"をクリック
 
 <!-- パッケージマネージャー画像を削除 -->
 
 ### ステップ2: Node.jsをインストール
-> MCP Unityサーバーを実行するには、コンピューターにNode.js 18以降がインストールされている必要があります：
+> The Bifrostサーバーを実行するには、コンピューターにNode.js 18以降がインストールされている必要があります：
 
 <details>
 <summary><span style="font-size: 1.1em; font-weight: bold;">Windows</span></summary>
@@ -151,7 +151,7 @@ MCP Unityは、Unityの`Library/PackedCache`フォルダーをワークスペー
 <summary><span style="font-size: 1.1em; font-weight: bold;">オプション1: Unityエディターを使用して設定</span></summary>
 
 1. Unityエディターを開く
-2. Tools > MCP Unity > Server Windowに移動
+2. Navigate to Tools > TheBifrost > Server Window
 3. AI LLMクライアントの"Configure"ボタンをクリック
 <!-- 設定クライアント画像を削除 -->
 
@@ -165,15 +165,15 @@ MCP Unityは、Unityの`Library/PackedCache`フォルダーをワークスペー
 
 AIクライアントのMCP設定ファイル（例：Claude Desktopのclaude_desktop_config.json）を開き、以下のテキストをコピー：
 
-> `ABSOLUTE/PATH/TO`をMyPersonalMcpServerインストールの絶対パスに置き換えるか、UnityエディターMCPサーバーウィンドウ（Tools > MCP Unity > Server Window）からテキストをコピー
+> `ABSOLUTE/PATH/TO`をThe Bifrostインストールの絶対パスに置き換えるか、UnityエディターMCPサーバーウィンドウ（Tools > TheBifrost > Server Window）からテキストをコピー
 
 ```json
 {
   "mcpServers": {
-    "mypersonalmcp-server": {
+    "thebifrost-server": {
       "command": "node",
       "args": [
-        "ABSOLUTE/PATH/TO/MyPersonalMcpServer/Server~/build/index.js"
+        "ABSOLUTE/PATH/TO/TheBifrost/Server~/build/index.js"
       ]
     }
   }
@@ -184,7 +184,7 @@ AIクライアントのMCP設定ファイル（例：Claude Desktopのclaude_des
 
 ## <a name="start-server"></a>サーバーの起動
 
-MCP Unityサーバーを起動するには2つの方法があります：
+The Bifrostサーバーを起動するには2つの方法があります：
 
 ### オプション1: Unityエディター経由で起動
 1. Unityエディターを開く
@@ -208,7 +208,7 @@ MCP Unityサーバーを起動するには2つの方法があります：
 <summary><span style="font-size: 1.1em; font-weight: bold;">Option 1: Windows OS</span></summary>
 
 1. Unityエディターを開きます
-2. **Tools > MCP Unity > Server Window** に移動します
+2. **Tools > TheBifrost > Server Window** に移動します
 3. **Request Timeout (seconds)** の値を希望のタイムアウト秒数に変更します
 4. Unityはシステム環境変数UNITY_REQUEST_TIMEOUTに新しいタイムアウト値を設定します
 5. Node.jsサーバーを再起動します
@@ -222,19 +222,17 @@ MCP Unityサーバーを起動するには2つの方法があります：
 Windows 以外の OS の場合は、次の 2 か所で設定する必要があります。
 
 ### エディター内プロセスのタイムアウト
-
 1. Unityエディターを開きます
-2. **Tools > MCP Unity > Server Window** に移動します
+2. **Tools > TheBifrost > Server Window** に移動します
 3. **Request Timeout (seconds)** の値を希望のタイムアウト秒数に変更します
 
 ### WebSocketのタイムアウト
-
 1. ターミナルで UNITY_REQUEST_TIMEOUT 環境変数を設定します
-    - Powershell
+   - Powershell
    ```powershell
    $env:UNITY_REQUEST_TIMEOUT = "300"
    ```
-    - Command Prompt/Terminal
+   - Command Prompt/Terminal
    ```cmd
    set UNITY_REQUEST_TIMEOUT=300
    ```
@@ -243,12 +241,12 @@ Windows 以外の OS の場合は、次の 2 か所で設定する必要があ�
 
 </details>
 
-> [!TIP]  
+> [!TIP]
 > AIコーディングIDE（Claude Desktop、Cursor IDE、Windsurf IDE など）とMCPサーバー間のタイムアウト設定は、IDEによって異なります。
 
 ## <a name="debug-server"></a>サーバーのデバッグ
 
-MCP Unityサーバーをデバッグするには、以下の方法を使用できます：
+The Bifrostサーバーをデバッグするには、以下の方法を使用できます：
 
 ### オプション1: Unityエディターを使用してデバッグ
 1. Unityエディターを開く
@@ -269,30 +267,30 @@ MCP Unityサーバーをデバッグするには、以下の方法を使用で�
 <summary><span style="font-size: 1.1em; font-weight: bold;">接続の問題</span></summary>
 
 - WebSocketサーバーが実行中であることを確認してください（UnityのServer Windowを確認）
-- ファイアウォールの制限が接続を妨げていないか確認してください
-- ポート番号が正しいことを確認してください（デフォルトは8080）
-- UnityエディターのMCP Serverウィンドウでポート番号を変更できます（ツール > MCP Unity > Server Window）
+- Send a console log message from MCP client to force a reconnection between MCP client and Unity server
+- ポート番号が正しいことを確認してください（デフォルトは8090）
+- UnityエディターのThe Bifrost Serverウィンドウでポート番号を変更できます（ツール > TheBifrost > Server Window）
 </details>
 
 <details>
 <summary><span style="font-size: 1.1em; font-weight: bold;">サーバーが起動しない</span></summary>
 
-- Unityコンソールにエラーメッセージがないか確認してください
-- Node.jsが正しくインストールされ、PATHで利用可能であることを確認してください
-- Serverディレクトリ内の依存関係がすべてインストールされていることを確認してください
+- Check the Unity Console for error messages
+- Ensure Node.js is properly installed and accessible in your PATH
+- Verify that all dependencies are installed in the Server directory
 </details>
 
 <details>
 <summary><span style="font-size: 1.1em; font-weight: bold;">Play Modeテスト実行時の接続失敗</span></summary>
 
-`run_tests` ツールは以下の応答を返します：
+The `run_tests` tool returns the following response:
 ```
 Error:
 Connection failed: Unknown error
 ```
 
-このエラーは、Play Modeへ切り替える際にドメインリロードが発生し、ブリッジ接続が失われるために発生します。  
-回避策は、**Edit > Project Settings > Editor > "Enter Play Mode Settings"** で **Reload Domain** をオフにすることです。
+This error occurs because the bridge connection is lost when the domain reloads upon switching to Play Mode.
+The workaround is to turn off **Reload Domain** in **Edit > Project Settings > Editor > "Enter Play Mode Settings"**.
 </details>
 
 ## サポート・フィードバック

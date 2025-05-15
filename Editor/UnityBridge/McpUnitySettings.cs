@@ -1,27 +1,27 @@
 using System;
 using System.IO;
-using MyPersonalMcp.Utils;
+using TheBifrost.Utils;
 using UnityEngine;
 using UnityEditor;
 
-namespace MyPersonalMcp.Unity
+namespace TheBifrost.Unity
 {
     /// <summary>
-    /// Handles persistence of MCP Unity settings
+    /// Handles persistence of TheBifrost settings
     /// </summary>
     [Serializable]
-    public class MyPersonalMcpSettings
+    public class TheBifrostSettings
     {
         // Constants
         public const string ServerVersion = "1.0.0";
-        public const string PackageName = "com.user.my-personal-mcp";
+        public const string PackageName = "com.nathanielgarelik.thebifrost";
         public const int RequestTimeoutMinimum = 10;
 
         private const string EnvUnityPort = "UNITY_PORT";
         private const string EnvUnityRequestTimeout = "UNITY_REQUEST_TIMEOUT";
-        private const string SettingsPath = "ProjectSettings/MyPersonalMcpSettings.json";
+        private const string SettingsPath = "ProjectSettings/TheBifrostSettings.json";
         
-        private static MyPersonalMcpSettings _instance;
+        private static TheBifrostSettings _instance;
 
         // Server settings
         public int Port { get; set; } = 8090;
@@ -38,13 +38,13 @@ namespace MyPersonalMcp.Unity
         /// <summary>
         /// Singleton instance of settings
         /// </summary>
-        public static MyPersonalMcpSettings Instance
+        public static TheBifrostSettings Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new MyPersonalMcpSettings();
+                    _instance = new TheBifrostSettings();
                 }
                 return _instance;
             }
@@ -53,7 +53,7 @@ namespace MyPersonalMcp.Unity
         /// <summary>
         /// Private constructor for singleton
         /// </summary>
-        private MyPersonalMcpSettings() 
+        private TheBifrostSettings()
         { 
             LoadSettings();
             VsCodeWorkspaceUtils.AddPackageCacheToWorkspace();
@@ -66,7 +66,7 @@ namespace MyPersonalMcp.Unity
         {
             try
             {
-                // Load settings from MyPersonalMcpSettings.json
+                // Load settings from TheBifrostSettings.json
                 if (File.Exists(SettingsPath))
                 {
                     string json = File.ReadAllText(SettingsPath);
@@ -88,7 +88,7 @@ namespace MyPersonalMcp.Unity
             catch (Exception ex)
             {
                 // Can't use LoggerService here as it depends on settings
-                Debug.LogError($"[MCP Unity] Failed to load settings: {ex.Message}");
+                Debug.LogError($"[TheBifrost] Failed to load settings: {ex.Message}");
             }
         }
 
@@ -99,7 +99,7 @@ namespace MyPersonalMcp.Unity
         {
             try
             {
-                // Save settings to MyPersonalMcpSettings.json
+                // Save settings to TheBifrostSettings.json
                 string json = JsonUtility.ToJson(this, true);
                 File.WriteAllText(SettingsPath, json);
 
@@ -114,7 +114,7 @@ namespace MyPersonalMcp.Unity
             catch (Exception ex)
             {
                 // Can't use LoggerService here as it might create circular dependency
-                Debug.LogError($"[MCP Unity] Failed to save settings: {ex.Message}");
+                Debug.LogError($"[TheBifrost] Failed to save settings: {ex.Message}");
             }
         }
     }

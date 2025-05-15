@@ -1,13 +1,13 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
-using MyPersonalMcp.Unity;
+using TheBifrost.Unity;
 using UnityEngine;
 using UnityEditor;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace MyPersonalMcp.Utils
+namespace TheBifrost.Utils
 {
     /// <summary>
     /// Utility class for MCP configuration operations
@@ -15,14 +15,14 @@ namespace MyPersonalMcp.Utils
     public static class McpConfigUtils
     {
         /// <summary>
-        /// Generates the MCP configuration JSON to setup the Unity MCP server in different AI Clients
+        /// Generates the MCP configuration JSON to setup TheBifrost server in different AI Clients
         /// </summary>
         public static string GenerateMcpConfigJson(bool useTabsIndentation)
         {
             string serverPath = GetServerPath();
             
             // Check if we got an error string instead of a valid path
-            if (serverPath.StartsWith("[MCP Unity] Could not locate Server directory"))
+            if (serverPath.StartsWith("[TheBifrost] Could not locate Server directory"))
             {
                 Debug.LogError("Failed to generate MCP config: " + serverPath);
                 return "{}";
@@ -33,7 +33,7 @@ namespace MyPersonalMcp.Utils
             // Verify the index.js file exists
             if (!File.Exists(serverIndexPath))
             {
-                Debug.LogError($"[MCP Unity] Server index.js not found at: {serverIndexPath}. Make sure the server is built.");
+                Debug.LogError($"[TheBifrost] Server index.js not found at: {serverIndexPath}. Make sure the server is built.");
                 return "{}";
             }
             
@@ -76,22 +76,22 @@ namespace MyPersonalMcp.Utils
             
             return stringWriter.ToString().Replace("\\", "/").Replace("//", "/");
         }
-
+        
         /// <summary>
         /// Gets the absolute path to the Server directory containing package.json
-        /// Works whether MCP Unity is installed via Package Manager or directly in the Assets folder
+        /// Works whether TheBifrost is installed via Package Manager or directly in the Assets folder
         /// </summary>
         public static string GetServerPath()
         {
             // First, try to find the package info via Package Manager
-            var packageInfo = UnityEditor.PackageManager.PackageInfo.FindForAssetPath($"Packages/{MyPersonalMcpSettings.PackageName}");
+            var packageInfo = UnityEditor.PackageManager.PackageInfo.FindForAssetPath($"Packages/{TheBifrostSettings.PackageName}");
                 
             if (packageInfo != null && !string.IsNullOrEmpty(packageInfo.resolvedPath))
             {
                 string serverPath = Path.Combine(packageInfo.resolvedPath, "Server~");
                 if (Directory.Exists(serverPath))
                 {
-                    Debug.Log($"[MCP Unity] Found Server directory via Package Manager at: {serverPath}");
+                    Debug.Log($"[TheBifrost] Found Server directory via Package Manager at: {serverPath}");
                     return serverPath;
                 }
             }
@@ -100,7 +100,7 @@ namespace MyPersonalMcp.Utils
             string projectServerPath = Path.Combine(Application.dataPath, "..", "TheBifrost", "Server~");
             if (Directory.Exists(projectServerPath))
             {
-                Debug.Log($"[MCP Unity] Found Server directory in project at: {projectServerPath}");
+                Debug.Log($"[TheBifrost] Found Server directory in project at: {projectServerPath}");
                 return Path.GetFullPath(projectServerPath);
             }
             
@@ -117,18 +117,18 @@ namespace MyPersonalMcp.Utils
                     
                     if (Path.GetFileName(directoryName) == "Server~")
                     {
-                        Debug.Log($"[MCP Unity] Found Server directory via tsconfig search at: {directoryName}");
+                        Debug.Log($"[TheBifrost] Found Server directory via tsconfig search at: {directoryName}");
                         return directoryName;
                     }
                 }
             }
             
             // If we get here, we couldn't find the server path
-            var errorString = "[MCP Unity] Could not locate Server directory. Please check the installation of the MCP Unity package.";
+            var errorString = "[TheBifrost] Could not locate Server directory. Please check the installation of TheBifrost package.";
             Debug.LogError(errorString);
             return errorString;
         }
-
+        
         /// <summary>
         /// Adds the MCP configuration to the Windsurf MCP config file
         /// </summary>
@@ -195,10 +195,10 @@ namespace MyPersonalMcp.Utils
                             existingConfig["mcpServers"] = new JObject();
                         }
                         
-                        // Add or update the MyPersonalMcpServer server config
-                        if (mcpServers["MyPersonalMcpServer"] != null)
+                        // Add or update the thebifrost-server server config
+                        if (mcpServers["thebifrost-server"] != null)
                         {
-                            ((JObject)existingConfig["mcpServers"])["MyPersonalMcpServer"] = mcpServers["MyPersonalMcpServer"];
+                            ((JObject)existingConfig["mcpServers"])["thebifrost-server"] = mcpServers["thebifrost-server"];
                         }
                         
                         // Write the updated config back to the file

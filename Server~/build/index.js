@@ -25,7 +25,7 @@ const toolLogger = new Logger('Tools', LogLevel.INFO);
 const resourceLogger = new Logger('Resources', LogLevel.INFO);
 // Initialize the MCP server
 const server = new McpServer({
-    name: "MCP Unity Server",
+    name: "TheBifrost MCP Server",
     version: "1.0.0"
 }, {
     capabilities: {

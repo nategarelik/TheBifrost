@@ -1,11 +1,11 @@
 {
-  "name": "my-personal-mcp-server-node",
+  "name": "thebifrost-server-node",
   "version": "1.0.0",
-  "description": "My Personal MCP Node.js Server",
+  "description": "The Bifrost Node.js Server",
   "main": "dist/index.js",
   "type": "module",
   "bin": {
-    "mypersonalmcp-server": "./build/index.js"
+    "thebifrost-server": "./build/index.js"
   },
   "files": [
     "build"
@@ -21,9 +21,10 @@
     "unity",
     "unity3d",
     "game",
-    "engine"
+    "engine",
+    "bifrost"
   ],
-  "author": "Rooroo User",
+  "author": "Nathaniel Garelik",
   "license": "MIT",
   "devDependencies": {
     "@types/cors": "^2.8.17",
