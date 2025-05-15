@@ -17,14 +17,15 @@ namespace TheBifrost.Utils
         /// <summary>
         /// Generates the MCP configuration JSON to setup TheBifrost server in different AI Clients
         /// </summary>
-        public static string GenerateMcpConfigJson(bool useTabsIndentation)
+        /// <param name="serverPath">The absolute path to the server directory containing build/index.js</param>
+        /// <param name="useTabsIndentation">Whether to use tabs for indentation</param>
+        /// <returns>MCP configuration JSON string</returns>
+        public static string GenerateMcpConfigJson(string serverPath, bool useTabsIndentation)
         {
-            string serverPath = GetServerPath();
-            
-            // Check if we got an error string instead of a valid path
-            if (serverPath.StartsWith("[TheBifrost] Could not locate Server directory"))
+            // Verify the server path exists
+            if (string.IsNullOrEmpty(serverPath) || !Directory.Exists(serverPath))
             {
-                Debug.LogError("Failed to generate MCP config: " + serverPath);
+                Debug.LogError($"[TheBifrost] Invalid server path: {serverPath}");
                 return "{}";
             }
             

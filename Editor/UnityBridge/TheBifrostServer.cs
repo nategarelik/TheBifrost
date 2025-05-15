@@ -81,45 +81,43 @@ namespace TheBifrost.Unity
         /// <summary>
         /// Start the WebSocket Server to communicate with Node.js
         /// </summary>
-        public void StartServer()
+        /// <param name="serverPath">The absolute path to the server directory containing build/index.js</param>
+        public void StartServer(string serverPath)
         {
             if (IsListening) return;
             
             try
             {
-                // Ensure dependencies are installed
-                string serverPath = McpConfigUtils.GetServerPath();
-                if (!string.IsNullOrEmpty(serverPath) && Directory.Exists(serverPath))
+                // Verify the server path exists
+                if (string.IsNullOrEmpty(serverPath) || !Directory.Exists(serverPath))
                 {
-                    // Run npm install in the server directory
-                    var processStartInfo = new ProcessStartInfo
-                    {
-                        FileName = "npm",
-                        Arguments = "install",
-                        WorkingDirectory = serverPath,
-                        CreateNoWindow = true,
-                        UseShellExecute = false,
-                        RedirectStandardOutput = true,
-                        RedirectStandardError = true
-                    };
-
-                    using (var process = new Process { StartInfo = processStartInfo })
-                    {
-                        process.Start();
-                        process.WaitForExit();
-                        
-                        if (process.ExitCode != 0)
-                        {
-                            McpLogger.LogError($"Failed to install server dependencies: {process.StandardError.ReadToEnd()}");
-                            return;
-                        }
-                        McpLogger.LogInfo("Server dependencies installed successfully");
-                    }
-                }
-                else
-                {
-                    McpLogger.LogError("Could not find server path to install dependencies");
+                    McpLogger.LogError($"Invalid server path: {serverPath}");
                     return;
+                }
+
+                // Run npm install in the server directory
+                var processStartInfo = new ProcessStartInfo
+                {
+                    FileName = "npm",
+                    Arguments = "install",
+                    WorkingDirectory = serverPath,
+                    CreateNoWindow = true,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true
+                };
+
+                using (var process = new Process { StartInfo = processStartInfo })
+                {
+                    process.Start();
+                    process.WaitForExit();
+                    
+                    if (process.ExitCode != 0)
+                    {
+                        McpLogger.LogError($"Failed to install server dependencies: {process.StandardError.ReadToEnd()}");
+                        return;
+                    }
+                    McpLogger.LogInfo("Server dependencies installed successfully");
                 }
 
                 // Check if the server needs to be built
