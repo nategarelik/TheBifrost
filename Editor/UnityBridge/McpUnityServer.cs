@@ -5,9 +5,9 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 using System.Diagnostics;
-using TheBifrost.Tools;
-using TheBifrost.Resources;
-using TheBifrost.Services;
+using MyPersonalMcp.Tools;
+using MyPersonalMcp.Resources;
+using MyPersonalMcp.Services;
 using TheBifrost.Utils;
 using WebSocketSharp.Server;
 using Debug = UnityEngine.Debug;
@@ -23,13 +23,13 @@ namespace TheBifrost.Unity
     {
         private static TheBifrostServer _instance;
         
-        private readonly Dictionary<string, McpToolBase> _tools = new Dictionary<string, McpToolBase>();
-        private readonly Dictionary<string, McpResourceBase> _resources = new Dictionary<string, McpResourceBase>();
+        private readonly Dictionary<string, MyPersonalMcp.Tools.McpToolBase> _tools = new Dictionary<string, MyPersonalMcp.Tools.McpToolBase>();
+        private readonly Dictionary<string, MyPersonalMcp.Resources.McpResourceBase> _resources = new Dictionary<string, MyPersonalMcp.Resources.McpResourceBase>();
         
         private WebSocketServer _webSocketServer;
         private CancellationTokenSource _cts;
-        private TestRunnerService _testRunnerService;
-        private ConsoleLogsService _consoleLogsService;
+        private MyPersonalMcp.Services.TestRunnerService _testRunnerService;
+        private MyPersonalMcp.Services.ConsoleLogsService _consoleLogsService;
 
         /// <summary>
         /// Static constructor that gets called when Unity loads due to InitializeOnLoad attribute

@@ -5,27 +5,27 @@ using UnityEngine;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WebSocketSharp;
-using WebSocketSharp.Server;
-using MyPersonalMcp.Tools;
-using MyPersonalMcp.Resources;
+using TheBifrost.Tools;
+using TheBifrost.Resources;
+using TheBifrost.Services;
 using Unity.EditorCoroutines.Editor;
 using System.Collections;
 using System.Collections.Specialized;
-using MyPersonalMcp.Utils;
+using TheBifrost.Utils;
 
-namespace MyPersonalMcp.Unity
+namespace TheBifrost.Unity
 {
     /// <summary>
     /// WebSocket handler for MCP Unity communications
     /// </summary>
-    public class MyPersonalMcpSocketHandler : WebSocketBehavior
+    public class McpUnitySocketHandler : WebSocketBehavior
     {
-        private readonly MyPersonalMcpServer _server;
+        private readonly TheBifrostServer _server;
         
         /// <summary>
         /// Default constructor required by WebSocketSharp
         /// </summary>
-        public MyPersonalMcpSocketHandler(MyPersonalMcpServer server)
+        public McpUnitySocketHandler(TheBifrostServer server)
         {
             _server = server;
         }
