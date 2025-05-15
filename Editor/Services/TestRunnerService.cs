@@ -94,7 +94,7 @@ namespace TheBifrost.Services
             _testRunnerApi.Execute(new ExecutionSettings(filter));
 
             return await WaitForCompletionAsync(
-                MyPersonalMcpSettings.Instance.RequestTimeoutSeconds);
+                TheBifrostSettings.Instance.RequestTimeoutSeconds);
         }
         
         /// <summary>
@@ -182,7 +182,7 @@ namespace TheBifrost.Services
             if (winner != _tcs.Task)
             {
                 _tcs.TrySetResult(
-                    MyPersonalMcpSocketHandler.CreateErrorResponse(
+                    TheBifrostSocketHandler.CreateErrorResponse(
                         $"Test run timed out after {timeoutSeconds} seconds",
                         "test_runner_timeout"));
             }

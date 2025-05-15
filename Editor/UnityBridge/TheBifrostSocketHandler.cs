@@ -56,7 +56,7 @@ namespace TheBifrost.Unity
         {
             try
             {
-                TheBifrostLogger.LogInfo($"WebSocket message received: {e.Data}");
+                McpLogger.LogInfo($"WebSocket message received: {e.Data}");
                 
                 var requestJson = JObject.Parse(e.Data);
                 var method = requestJson["method"]?.ToString();
@@ -89,14 +89,14 @@ namespace TheBifrost.Unity
                 JObject jsonRpcResponse = CreateResponse(requestId, responseJson);
                 string responseStr = jsonRpcResponse.ToString(Formatting.None);
                 
-                TheBifrostLogger.LogInfo($"WebSocket message response: {responseStr}");
+                McpLogger.LogInfo($"WebSocket message response: {responseStr}");
                 
                 // Send the response back to the client
                 Send(responseStr);
             }
             catch (Exception ex)
             {
-                TheBifrostLogger.LogError($"Error processing message: {ex.Message}");
+                McpLogger.LogError($"Error processing message: {ex.Message}");
                 
                 Send(CreateErrorResponse($"Internal server error: {ex.Message}", "internal_error").ToString(Formatting.None));
             }
@@ -118,7 +118,7 @@ namespace TheBifrost.Unity
                 _server.Clients.Add(ID, clientName);
             }
             
-            TheBifrostLogger.LogInfo($"WebSocket client '{clientName}' connected");
+            McpLogger.LogInfo($"WebSocket client '{clientName}' connected");
         }
         
         /// <summary>
@@ -131,7 +131,7 @@ namespace TheBifrost.Unity
             // Remove the client from the server
             _server.Clients.Remove(ID);
             
-            TheBifrostLogger.LogInfo($"WebSocket client '{clientName}' disconnected: {e.Reason}");
+            McpLogger.LogInfo($"WebSocket client '{clientName}' disconnected: {e.Reason}");
         }
         
         /// <summary>
@@ -139,7 +139,7 @@ namespace TheBifrost.Unity
         /// </summary>
         protected override void OnError(ErrorEventArgs e)
         {
-            TheBifrostLogger.LogError($"WebSocket error: {e.Message}");
+            McpLogger.LogError($"WebSocket error: {e.Message}");
         }
         
         /// <summary>
@@ -161,7 +161,7 @@ namespace TheBifrost.Unity
             }
             catch (Exception ex)
             {
-                TheBifrostLogger.LogError($"Error executing tool {tool.Name}: {ex.Message}");
+                McpLogger.LogError($"Error executing tool {tool.Name}: {ex.Message}");
                 tcs.SetResult(CreateErrorResponse(
                     $"Failed to execute tool {tool.Name}: {ex.Message}",
                     "tool_execution_error"
@@ -190,7 +190,7 @@ namespace TheBifrost.Unity
             }
             catch (Exception ex)
             {
-                TheBifrostLogger.LogError($"Error fetching resource {resource.Name}: {ex}");
+                McpLogger.LogError($"Error fetching resource {resource.Name}: {ex}");
                 tcs.SetResult(CreateErrorResponse(
                     $"Failed to fetch resource {resource.Name}: {ex.Message}",
                     "resource_fetch_error"

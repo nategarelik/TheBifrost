@@ -38,13 +38,13 @@ namespace TheBifrost.Tools
             switch (type)
             {
                 case "error":
-                    Debug.LogError($"[MCP]: {message}");
+                    Debug.LogError($"[The Bifrost]: {message}");
                     break;
                 case "warning":
-                    Debug.LogWarning($"[MCP]: {message}");
+                    Debug.LogWarning($"[The Bifrost]: {message}");
                     break;
                 default:
-                    Debug.Log($"[MCP]: {message}");
+                    Debug.Log($"[The Bifrost]: {message}");
                     break;
             }
  
