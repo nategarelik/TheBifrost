@@ -5,12 +5,13 @@ using UnityEngine;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WebSocketSharp;
-using TheBifrost.Tools;
-using TheBifrost.Resources;
-using TheBifrost.Services;
+using WebSocketSharp.Server;
+using UnityEditor;
 using Unity.EditorCoroutines.Editor;
 using System.Collections;
 using System.Collections.Specialized;
+using TheBifrost.Tools;
+using TheBifrost.Resources;
 using TheBifrost.Utils;
 
 namespace TheBifrost.Unity
@@ -144,7 +145,7 @@ namespace TheBifrost.Unity
         /// <summary>
         /// Execute a tool with the provided parameters
         /// </summary>
-        private IEnumerator ExecuteTool(McpToolBase tool, JObject parameters, TaskCompletionSource<JObject> tcs)
+        private IEnumerator ExecuteTool(TheBifrost.Tools.McpToolBase tool, JObject parameters, TaskCompletionSource<JObject> tcs)
         {
             try
             {
@@ -173,7 +174,7 @@ namespace TheBifrost.Unity
         /// <summary>
         /// Fetch a resource with the provided parameters
         /// </summary>
-        private IEnumerator FetchResourceCoroutine(McpResourceBase resource, JObject parameters, TaskCompletionSource<JObject> tcs)
+        private IEnumerator FetchResourceCoroutine(TheBifrost.Resources.McpResourceBase resource, JObject parameters, TaskCompletionSource<JObject> tcs)
         {
             try
             {
