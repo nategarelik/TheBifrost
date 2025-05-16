@@ -143,6 +143,20 @@ namespace TheBifrost.Unity
             }
             
             EditorGUILayout.Space();
+
+            // User-defined server path
+            EditorGUILayout.BeginHorizontal();
+            string newUserDefinedServerPath = EditorGUILayout.TextField(new GUIContent("Node.js Server Path", "Path to the TheBifrost Node.js server directory (e.g., path/to/TheBifrost/Server~)"), settings.UserDefinedServerPath);
+            if (newUserDefinedServerPath != settings.UserDefinedServerPath)
+            {
+                settings.UserDefinedServerPath = newUserDefinedServerPath;
+                settings.SaveSettings();
+                // Force MCP config regeneration if path changes
+                _mcpConfigJson = "";
+            }
+            EditorGUILayout.EndHorizontal();
+            
+            EditorGUILayout.Space();
             
             // Server control buttons
             EditorGUILayout.BeginHorizontal();
@@ -151,7 +165,17 @@ namespace TheBifrost.Unity
             GUI.enabled = !TheBifrostServer.Instance.IsListening;
             if (GUILayout.Button("Start Server", GUILayout.Height(30)))
             {
-                TheBifrostServer.Instance.StartServer(McpConfigUtils.GetServerPath());
+                string serverPathToUse = !string.IsNullOrEmpty(settings.UserDefinedServerPath)
+                                            ? settings.UserDefinedServerPath
+                                            : McpConfigUtils.GetServerPath();
+                if (string.IsNullOrEmpty(serverPathToUse) || serverPathToUse.StartsWith("[")) // Check for GetServerPath error
+                {
+                    Debug.LogError("[TheBifrost] Server path is not configured or could not be automatically determined. Please set it in the The Bifrost window.");
+                }
+                else
+                {
+                    TheBifrostServer.Instance.StartServer(serverPathToUse);
+                }
             }
             
             // Disconnect button - enabled only when connected
@@ -213,7 +237,18 @@ namespace TheBifrost.Unity
             
             if (string.IsNullOrEmpty(_mcpConfigJson) || before != _tabsIndentationJson)
             {
-                _mcpConfigJson = McpConfigUtils.GenerateMcpConfigJson(McpConfigUtils.GetServerPath(), _tabsIndentationJson);
+                string pathForJson = !string.IsNullOrEmpty(settings.UserDefinedServerPath)
+                                        ? settings.UserDefinedServerPath
+                                        : McpConfigUtils.GetServerPath();
+                if (string.IsNullOrEmpty(pathForJson) || pathForJson.StartsWith("["))
+                {
+                    _mcpConfigJson = "{\n  \"error\": \"Server path not configured. Please set it above.\"\n}";
+                     Debug.LogError("[TheBifrost] Cannot generate MCP JSON: Server path is not configured or could not be automatically determined.");
+                }
+                else
+                {
+                    _mcpConfigJson = McpConfigUtils.GenerateMcpConfigJson(pathForJson, _tabsIndentationJson);
+                }
             }
                 
             if (GUILayout.Button("Copy to Clipboard", GUILayout.Height(30)))
@@ -227,7 +262,10 @@ namespace TheBifrost.Unity
             
             if (GUILayout.Button("Configure Windsurf IDE", GUILayout.Height(30)))
             {
-                bool added = McpConfigUtils.AddToWindsurfIdeConfig(_tabsIndentationJson);
+                string serverPathForConfig = !string.IsNullOrEmpty(settings.UserDefinedServerPath)
+                                                ? settings.UserDefinedServerPath
+                                                : McpConfigUtils.GetServerPath();
+                bool added = McpConfigUtils.AddToWindsurfIdeConfig(serverPathForConfig, _tabsIndentationJson);
                 if (added)
                 {
                     EditorUtility.DisplayDialog("Success", "The MCP configuration was successfully added to the Windsurf config file.", "OK");
@@ -242,7 +280,10 @@ namespace TheBifrost.Unity
             
             if (GUILayout.Button("Configure Claude Desktop", GUILayout.Height(30)))
             {
-                bool added = McpConfigUtils.AddToClaudeDesktopConfig(_tabsIndentationJson);
+                string serverPathForConfig = !string.IsNullOrEmpty(settings.UserDefinedServerPath)
+                                                ? settings.UserDefinedServerPath
+                                                : McpConfigUtils.GetServerPath();
+                bool added = McpConfigUtils.AddToClaudeDesktopConfig(serverPathForConfig, _tabsIndentationJson);
                 if (added)
                 {
                     EditorUtility.DisplayDialog("Success", "The MCP configuration was successfully added to the Claude Desktop config file.", "OK");
@@ -257,7 +298,10 @@ namespace TheBifrost.Unity
             
             if (GUILayout.Button("Configure Cursor", GUILayout.Height(30)))
             {
-                bool added = McpConfigUtils.AddToCursorConfig(_tabsIndentationJson);
+                string serverPathForConfig = !string.IsNullOrEmpty(settings.UserDefinedServerPath)
+                                                ? settings.UserDefinedServerPath
+                                                : McpConfigUtils.GetServerPath();
+                bool added = McpConfigUtils.AddToCursorConfig(serverPathForConfig, _tabsIndentationJson);
                 if (added)
                 {
                     EditorUtility.DisplayDialog("Success", "The MCP configuration was successfully added to the Cursor config file.", "OK");

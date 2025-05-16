@@ -35,6 +35,9 @@ namespace TheBifrost.Unity
         [Tooltip("Whether to show info logs in the Unity console")]
         public bool EnableInfoLogs = true;
 
+        [Tooltip("User-defined path to the TheBifrost Node.js server directory (e.g., path/to/TheBifrost/Server~)")]
+        public string UserDefinedServerPath = "";
+
         /// <summary>
         /// Singleton instance of settings
         /// </summary>

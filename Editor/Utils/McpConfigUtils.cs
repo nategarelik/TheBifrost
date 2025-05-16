@@ -133,47 +133,53 @@ namespace TheBifrost.Utils
         /// <summary>
         /// Adds the MCP configuration to the Windsurf MCP config file
         /// </summary>
-        public static bool AddToWindsurfIdeConfig(bool useTabsIndentation)
+        public static bool AddToWindsurfIdeConfig(string serverPath, bool useTabsIndentation)
         {
             string configFilePath = GetWindsurfMcpConfigPath();
-            return AddToConfigFile(configFilePath, useTabsIndentation, "Windsurf");
+            return AddToConfigFile(configFilePath, serverPath, useTabsIndentation, "Windsurf");
         }
         
         /// <summary>
         /// Adds the MCP configuration to the Claude Desktop config file
         /// </summary>
-        public static bool AddToClaudeDesktopConfig(bool useTabsIndentation)
+        public static bool AddToClaudeDesktopConfig(string serverPath, bool useTabsIndentation)
         {
             string configFilePath = GetClaudeDesktopConfigPath();
-            return AddToConfigFile(configFilePath, useTabsIndentation, "Claude Desktop");
+            return AddToConfigFile(configFilePath, serverPath, useTabsIndentation, "Claude Desktop");
         }
         
         /// <summary>
         /// Adds the MCP configuration to the Cursor config file
         /// </summary>
-        public static bool AddToCursorConfig(bool useTabsIndentation)
+        public static bool AddToCursorConfig(string serverPath, bool useTabsIndentation)
         {
             string configFilePath = GetCursorConfigPath();
-            return AddToConfigFile(configFilePath, useTabsIndentation, "Cursor");
+            return AddToConfigFile(configFilePath, serverPath, useTabsIndentation, "Cursor");
         }
 
         /// <summary>
         /// Common method to add MCP configuration to a specified config file
         /// </summary>
         /// <param name="configFilePath">Path to the config file</param>
+        /// <param name="serverPath">Path to the TheBifrost Node.js server</param>
         /// <param name="useTabsIndentation">Whether to use tabs for indentation</param>
         /// <param name="productName">Name of the product (for error messages)</param>
         /// <returns>True if successfuly added the config, false otherwise</returns>
-        private static bool AddToConfigFile(string configFilePath, bool useTabsIndentation, string productName)
+        private static bool AddToConfigFile(string configFilePath, string serverPath, bool useTabsIndentation, string productName)
         {
             if (string.IsNullOrEmpty(configFilePath))
             {
                 Debug.LogError($"{productName} config file not found. Please make sure {productName} is installed.");
                 return false;
             }
+            if (string.IsNullOrEmpty(serverPath) || serverPath.StartsWith("[")) // Check for GetServerPath error or empty user path
+            {
+                 Debug.LogError($"[TheBifrost] Cannot configure {productName}: Server path is not configured or could not be automatically determined.");
+                return false;
+            }
                 
             // Generate fresh MCP config JSON
-            string mcpConfigJson = GenerateMcpConfigJson(GetServerPath(), useTabsIndentation);
+            string mcpConfigJson = GenerateMcpConfigJson(serverPath, useTabsIndentation);
                 
             // Parse the MCP config JSON
             JObject mcpConfig = JObject.Parse(mcpConfigJson);
