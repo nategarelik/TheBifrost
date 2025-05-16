@@ -152,7 +152,7 @@ namespace TheBifrost.Unity
             GUI.enabled = !mcpUnityServer.IsListening;
             if (GUILayout.Button("Start Server", GUILayout.Height(30)))
             {
-                mcpUnityServer.StartServer();
+                mcpUnityServer.StartServer(McpConfigUtils.GetServerPath());
             }
             
             // Disconnect button - enabled only when connected
@@ -212,7 +212,7 @@ namespace TheBifrost.Unity
             
             if (string.IsNullOrEmpty(_mcpConfigJson) || before != _tabsIndentationJson)
             {
-                _mcpConfigJson = McpConfigUtils.GenerateMcpConfigJson(_tabsIndentationJson);
+                _mcpConfigJson = McpConfigUtils.GenerateMcpConfigJson(McpConfigUtils.GetServerPath(), _tabsIndentationJson);
             }
                 
             if (GUILayout.Button("Copy to Clipboard", GUILayout.Height(30)))

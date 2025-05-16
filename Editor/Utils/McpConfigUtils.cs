@@ -173,7 +173,7 @@ namespace TheBifrost.Utils
             }
                 
             // Generate fresh MCP config JSON
-            string mcpConfigJson = GenerateMcpConfigJson(useTabsIndentation);
+            string mcpConfigJson = GenerateMcpConfigJson(GetServerPath(), useTabsIndentation);
                 
             // Parse the MCP config JSON
             JObject mcpConfig = JObject.Parse(mcpConfigJson);
