@@ -121,7 +121,7 @@ namespace TheBifrost.Unity
                 }
 
                 // Check if the server needs to be built
-                if (CheckAndBuildServerIfNeeded())
+                if (CheckAndBuildServerIfNeeded(serverPath))
                 {
                     McpLogger.LogInfo("Server built successfully");
                 }
@@ -260,16 +260,14 @@ namespace TheBifrost.Unity
         /// <summary>
         /// Check if the server needs to be built and build it if necessary
         /// </summary>
+        /// <param name="serverPath">The absolute path to the server directory.</param>
         /// <returns>True if the server was built, false otherwise</returns>
-        private bool CheckAndBuildServerIfNeeded()
+        private bool CheckAndBuildServerIfNeeded(string serverPath)
         {
             try
             {
-                // Get the server path
-                string serverPath = McpConfigUtils.GetServerPath();
-                
                 // Check if the server path is valid
-                if (serverPath.StartsWith("[TheBifrost] Could not locate Server directory"))
+                if (string.IsNullOrEmpty(serverPath) || !Directory.Exists(serverPath) || serverPath.StartsWith("["))
                 {
                     McpLogger.LogError("Could not locate Server directory. Please check the installation of TheBifrost package.");
                     return false;
