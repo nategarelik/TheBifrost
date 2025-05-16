@@ -7,28 +7,34 @@ namespace TheBifrost.Utils
     /// </summary>
     public static class McpLogger
     {
-        [System.Diagnostics.Conditional("MCP_DEBUG")]
         public static void Log(string message)
         {
-            Debug.Log($"[MCP] {message}");
+            // Basic log, could be controlled by a general "EnableDebugLogs" if needed
+            if (TheBifrost.Unity.TheBifrostSettings.Instance.EnableInfoLogs) // Example: Tie to existing setting for now
+            {
+                 Debug.Log($"[TheBifrost] {message}");
+            }
         }
 
-        [System.Diagnostics.Conditional("MCP_DEBUG")]
         public static void LogInfo(string message)
         {
-            Debug.Log($"[MCP] [INFO] {message}");
+            // Info logs should appear if EnableInfoLogs is true
+            if (TheBifrost.Unity.TheBifrostSettings.Instance.EnableInfoLogs)
+            {
+                Debug.Log($"[TheBifrost] [INFO] {message}");
+            }
         }
 
-        [System.Diagnostics.Conditional("MCP_DEBUG")]
         public static void LogWarning(string message)
         {
-            Debug.LogWarning($"[MCP] [WARNING] {message}");
+            // Warnings should always appear
+            Debug.LogWarning($"[TheBifrost] [WARNING] {message}");
         }
 
-        [System.Diagnostics.Conditional("MCP_DEBUG")]
         public static void LogError(string message)
         {
-            Debug.LogError($"[MCP] [ERROR] {message}");
+            // Errors should always appear
+            Debug.LogError($"[TheBifrost] [ERROR] {message}");
         }
     }
 }
