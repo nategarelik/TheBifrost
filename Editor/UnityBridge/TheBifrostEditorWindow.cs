@@ -73,9 +73,8 @@ namespace TheBifrost.Unity
             EditorGUILayout.LabelField("Status:", GUILayout.Width(120));
             
             TheBifrostSettings settings = TheBifrostSettings.Instance;
-            TheBifrostServer mcpUnityServer = TheBifrostServer.Instance;
-            string statusText = mcpUnityServer.IsListening ? "Server Online" : "Server Offline";
-            Color statusColor = mcpUnityServer.IsListening  ? Color.green : Color.red;
+            string statusText = TheBifrostServer.IsListening ? "Server Online" : "Server Offline";
+            Color statusColor = TheBifrostServer.IsListening  ? Color.green : Color.red;
             
             GUIStyle statusStyle = new GUIStyle(EditorStyles.boldLabel);
             statusStyle.normal.textColor = statusColor;
@@ -98,17 +97,17 @@ namespace TheBifrost.Unity
             {
                 settings.Port = newPort;
                 settings.SaveSettings();
-                mcpUnityServer.StopServer();
+                TheBifrostServer.StopServer();
                 EditorUtility.DisplayDialog("Restart MCP Client",
                 "Please restart your MCP Client (Windsurf, Cursor, Claude Desktop, etc.) to apply the changes.",
                 "OK");
             }
-            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.EndHorizontal();    
             
             EditorGUILayout.Space();
+            EditorGUILayout.BeginHorizontal();
             
             // Test timeout setting
-            EditorGUILayout.BeginHorizontal();
             int newTimeout = EditorGUILayout.IntField(new GUIContent("Request Timeout (seconds)", "Timeout in seconds for tool request"), settings.RequestTimeoutSeconds);
             if (newTimeout < TheBifrostSettings.RequestTimeoutMinimum)
             {
@@ -149,17 +148,17 @@ namespace TheBifrost.Unity
             EditorGUILayout.BeginHorizontal();
             
             // Connect button - enabled only when disconnected
-            GUI.enabled = !mcpUnityServer.IsListening;
+            GUI.enabled = !TheBifrostServer.IsListening;
             if (GUILayout.Button("Start Server", GUILayout.Height(30)))
             {
-                mcpUnityServer.StartServer(McpConfigUtils.GetServerPath());
+                TheBifrostServer.StartServer(McpConfigUtils.GetServerPath());
             }
             
             // Disconnect button - enabled only when connected
-            GUI.enabled = mcpUnityServer.IsListening;
+            GUI.enabled = TheBifrostServer.IsListening;
             if (GUILayout.Button("Stop Server", GUILayout.Height(30)))
             {
-                mcpUnityServer.StopServer();
+                TheBifrostServer.StopServer();
             }
             
             Repaint();
@@ -172,7 +171,7 @@ namespace TheBifrost.Unity
             EditorGUILayout.LabelField("Connected Clients", EditorStyles.boldLabel);
             EditorGUILayout.BeginVertical("box"); // Keep the default gray box for the container
 
-            var clients = mcpUnityServer.Clients;
+            var clients = TheBifrostServer.Clients;
             
             if (clients.Count > 0)
             {
@@ -205,7 +204,9 @@ namespace TheBifrost.Unity
             
             // MCP Config generation section
             EditorGUILayout.Space();
+            EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("MCP Configuration", EditorStyles.boldLabel);
+            EditorGUILayout.EndHorizontal();
 
             var before = _tabsIndentationJson;
             _tabsIndentationJson = EditorGUILayout.Toggle("Use Tabs indentation", _tabsIndentationJson);
