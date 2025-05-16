@@ -73,8 +73,8 @@ namespace TheBifrost.Unity
             EditorGUILayout.LabelField("Status:", GUILayout.Width(120));
             
             TheBifrostSettings settings = TheBifrostSettings.Instance;
-            string statusText = TheBifrostServer.IsListening ? "Server Online" : "Server Offline";
-            Color statusColor = TheBifrostServer.IsListening  ? Color.green : Color.red;
+            string statusText = TheBifrostServer.Instance.IsListening ? "Server Online" : "Server Offline";
+            Color statusColor = TheBifrostServer.Instance.IsListening  ? Color.green : Color.red;
             
             GUIStyle statusStyle = new GUIStyle(EditorStyles.boldLabel);
             statusStyle.normal.textColor = statusColor;
@@ -97,7 +97,7 @@ namespace TheBifrost.Unity
             {
                 settings.Port = newPort;
                 settings.SaveSettings();
-                TheBifrostServer.StopServer();
+                TheBifrostServer.Instance.StopServer();
                 EditorUtility.DisplayDialog("Restart MCP Client",
                 "Please restart your MCP Client (Windsurf, Cursor, Claude Desktop, etc.) to apply the changes.",
                 "OK");
@@ -148,17 +148,17 @@ namespace TheBifrost.Unity
             EditorGUILayout.BeginHorizontal();
             
             // Connect button - enabled only when disconnected
-            GUI.enabled = !TheBifrostServer.IsListening;
+            GUI.enabled = !TheBifrostServer.Instance.IsListening;
             if (GUILayout.Button("Start Server", GUILayout.Height(30)))
             {
-                TheBifrostServer.StartServer(McpConfigUtils.GetServerPath());
+                TheBifrostServer.Instance.StartServer(McpConfigUtils.GetServerPath());
             }
             
             // Disconnect button - enabled only when connected
-            GUI.enabled = TheBifrostServer.IsListening;
+            GUI.enabled = TheBifrostServer.Instance.IsListening;
             if (GUILayout.Button("Stop Server", GUILayout.Height(30)))
             {
-                TheBifrostServer.StopServer();
+                TheBifrostServer.Instance.StopServer();
             }
             
             Repaint();
@@ -171,7 +171,7 @@ namespace TheBifrost.Unity
             EditorGUILayout.LabelField("Connected Clients", EditorStyles.boldLabel);
             EditorGUILayout.BeginVertical("box"); // Keep the default gray box for the container
 
-            var clients = TheBifrostServer.Clients;
+            var clients = TheBifrostServer.Instance.Clients;
             
             if (clients.Count > 0)
             {
