@@ -84,16 +84,22 @@ namespace TheBifrost.Unity
         /// <param name="serverPath">The absolute path to the server directory containing build/index.js</param>
         public void StartServer(string serverPath)
         {
-            if (IsListening) return;
+            if (IsListening)
+            {
+                McpLogger.LogInfo("StartServer called but server is already listening.");
+                return;
+            }
+            McpLogger.LogInfo($"Attempting to start server with path: {serverPath}");
             
             try
             {
                 // Verify the server path exists
                 if (string.IsNullOrEmpty(serverPath) || !Directory.Exists(serverPath))
                 {
-                    McpLogger.LogError($"Invalid server path: {serverPath}");
+                    McpLogger.LogError($"StartServer Error: Invalid server path provided: '{serverPath}'. Path is null, empty, or directory does not exist.");
                     return;
                 }
+                McpLogger.LogInfo($"Server path '{serverPath}' is valid.");
 
                 // Run npm install in the server directory
                 var processStartInfo = new ProcessStartInfo
@@ -114,17 +120,33 @@ namespace TheBifrost.Unity
                     
                     if (process.ExitCode != 0)
                     {
-                        McpLogger.LogError($"Failed to install server dependencies: {process.StandardError.ReadToEnd()}");
+                        McpLogger.LogError($"npm install failed. Exit Code: {process.ExitCode}. Error: {process.StandardError.ReadToEnd()}");
                         return;
                     }
-                    McpLogger.LogInfo("Server dependencies installed successfully");
+                    McpLogger.LogInfo("npm install completed successfully.");
                 }
 
+                McpLogger.LogInfo("Proceeding to CheckAndBuildServerIfNeeded...");
                 // Check if the server needs to be built
-                if (CheckAndBuildServerIfNeeded(serverPath))
+                bool buildAttempted = CheckAndBuildServerIfNeeded(serverPath);
+                if (buildAttempted) // This means a build was needed and attempted
                 {
-                    McpLogger.LogInfo("Server built successfully");
+                    // Further checks for build success are inside CheckAndBuildServerIfNeeded
+                    // If it returns true, it implies build was successful or not needed.
+                    // If it returns false, an error was logged inside.
+                     McpLogger.LogInfo("CheckAndBuildServerIfNeeded completed. If build was needed, it was attempted.");
+                } else {
+                     McpLogger.LogInfo("CheckAndBuildServerIfNeeded determined no build was necessary.");
                 }
+
+                // Ensure build/index.js exists before starting WebSocketServer
+                string indexJsPath = Path.Combine(serverPath, "build", "index.js");
+                if (!File.Exists(indexJsPath))
+                {
+                    McpLogger.LogError($"StartServer Error: build/index.js not found at '{indexJsPath}' after build attempt. Cannot start WebSocket server.");
+                    return;
+                }
+                McpLogger.LogInfo($"build/index.js confirmed at '{indexJsPath}'.");
                 
                 // Create a new WebSocket server
                 _webSocketServer = new WebSocketServer($"ws://localhost:{TheBifrostSettings.Instance.Port}");
@@ -133,12 +155,18 @@ namespace TheBifrost.Unity
                 
                 // Start the server
                 _webSocketServer.Start();
-                
-                McpLogger.LogInfo($"WebSocket server started on port {TheBifrostSettings.Instance.Port}");
+                if (_webSocketServer.IsListening)
+                {
+                    McpLogger.LogInfo($"WebSocket server started successfully on port {TheBifrostSettings.Instance.Port}. Listening for connections at ws://localhost:{TheBifrostSettings.Instance.Port}/TheBifrost");
+                }
+                else
+                {
+                    McpLogger.LogError("WebSocketServer.Start() was called, but server is not listening. Check for other errors or port conflicts.");
+                }
             }
             catch (Exception ex)
             {
-                McpLogger.LogError($"Failed to start WebSocket server: {ex.Message}");
+                McpLogger.LogError($"StartServer Exception: Failed to start WebSocket server: {ex.Message}\nStackTrace: {ex.StackTrace}");
             }
         }
         
@@ -267,11 +295,13 @@ namespace TheBifrost.Unity
             try
             {
                 // Check if the server path is valid
+                McpLogger.LogInfo($"CheckAndBuildServerIfNeeded called with serverPath: {serverPath}");
                 if (string.IsNullOrEmpty(serverPath) || !Directory.Exists(serverPath) || serverPath.StartsWith("["))
                 {
-                    McpLogger.LogError("Could not locate Server directory. Please check the installation of TheBifrost package.");
+                    McpLogger.LogError($"CheckAndBuildServerIfNeeded Error: Invalid serverPath: '{serverPath}'.");
                     return false;
                 }
+                McpLogger.LogInfo($"CheckAndBuildServerIfNeeded: serverPath '{serverPath}' is valid.");
                 
                 // Check if the build directory exists
                 string buildDir = Path.Combine(serverPath, "build");
@@ -279,36 +309,36 @@ namespace TheBifrost.Unity
                 
                 if (Directory.Exists(buildDir) && File.Exists(indexJsPath))
                 {
-                    // Server is already built
-                    McpLogger.LogInfo("Server is already built");
-                    return false;
+                    McpLogger.LogInfo($"CheckAndBuildServerIfNeeded: Server already built at '{indexJsPath}'. No build needed.");
+                    return false; // Returning false indicates build was not *performed*, true indicates it was *attempted/successful*
                 }
                 
-                // Server needs to be built
-                McpLogger.LogInfo("Server needs to be built. Building now...");
+                McpLogger.LogInfo("CheckAndBuildServerIfNeeded: Server needs to be built. Attempting build...");
                 
-                // Run npm install
+                McpLogger.LogInfo("CheckAndBuildServerIfNeeded: Running npm install...");
                 if (!RunNpmCommand(serverPath, "install"))
                 {
-                    McpLogger.LogError("Failed to run npm install");
-                    return false;
+                    McpLogger.LogError("CheckAndBuildServerIfNeeded: npm install failed.");
+                    return false; // Build process failed
                 }
+                McpLogger.LogInfo("CheckAndBuildServerIfNeeded: npm install successful.");
                 
-                // Run npm run build
+                McpLogger.LogInfo("CheckAndBuildServerIfNeeded: Running npm run build...");
                 if (!RunNpmCommand(serverPath, "run build"))
                 {
-                    McpLogger.LogError("Failed to run npm run build");
-                    return false;
+                    McpLogger.LogError("CheckAndBuildServerIfNeeded: npm run build failed.");
+                    return false; // Build process failed
                 }
+                McpLogger.LogInfo("CheckAndBuildServerIfNeeded: npm run build successful.");
                 
                 // Check if the build was successful
                 if (!Directory.Exists(buildDir) || !File.Exists(indexJsPath))
                 {
-                    McpLogger.LogError("Build failed. Build directory or index.js not found.");
-                    return false;
+                    McpLogger.LogError($"CheckAndBuildServerIfNeeded: Build attempt finished, but build directory ('{buildDir}') or index.js ('{indexJsPath}') not found.");
+                    return false; // Build process failed
                 }
-                
-                return true;
+                McpLogger.LogInfo($"CheckAndBuildServerIfNeeded: Build successful. index.js found at '{indexJsPath}'.");
+                return true; // Build was needed and successfully performed
             }
             catch (Exception ex)
             {
