@@ -194,6 +194,10 @@ namespace TheBifrost.Unity
             // Register AddAssetToSceneTool
             AddAssetToSceneTool addAssetToSceneTool = new AddAssetToSceneTool();
             _tools.Add(addAssetToSceneTool.Name, addAssetToSceneTool);
+            
+            // Register ProBuilderTool
+            ProBuilderTool proBuilderTool = new ProBuilderTool();
+            _tools.Add(proBuilderTool.Name, proBuilderTool);
         }
         
         /// <summary>
